@@ -1,7 +1,8 @@
 <?php
 
 use App\Http\Controllers\Admin\CategoryController;
-use App\Http\Controllers\Admin\LoginController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\User\CartController;
 use App\Http\Controllers\User\CheckoutController;
 use App\Http\Controllers\User\HomeController;
@@ -24,16 +25,25 @@ use App\Http\Controllers\Admin\DashboardController;
 //Admin auth
 Route::get('/admin/login', function () {
     return view('admin.auth.login');
-})->name('login');
+})->name('admin.login')->middleware('block.admin.login');
 Route::post('/admin/login/authenticate', [LoginController::class,'login'])->name('admin.login.authenticate');
+Route::get('/admin/logout', [LogoutController::class,'logoutAdmin'])->name('admin.logout');
 
 //Admin
 Route::group([
     'namespace'=>'Admin',
-    'prefix'=>'admin'
+    'prefix'=>'admin',
+    'middleware' =>['admin','preventBackHistory'],
 ],function(){
-Route::get('/dashboard',[DashboardController::class,'index'])->name('admin.dashboard');
-Route::get('/categories',[CategoryController::class, 'index'])->name('admin.categories.list');
+    Route::get('/dashboard',[DashboardController::class,'index'])->name('admin.dashboard');
+    Route::prefix('categories')->name('admin.categories.')->group(function () {
+        Route::get('/',[CategoryController::class,'index'])->name('list');
+        Route::get('/create',[CategoryController::class,'create'])->name('create');
+        Route::post('/store',[CategoryController::class,'store'])->name('store');
+        Route::get('/edit/{id}',[CategoryController::class,'edit'])->name('edit');
+        Route::post('/update/{id}',[CategoryController::class,'update'])->name('update');
+        Route::delete('/{id}',[CategoryController::class,'delete'])->name('delete');
+        });
 });
 
 

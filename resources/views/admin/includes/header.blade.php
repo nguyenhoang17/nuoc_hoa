@@ -8,7 +8,9 @@
             <a href="index3.html" class="nav-link">Trang chủ</a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-            <a href="#" class="nav-link">Đăng xuất</a>
+            <a href="{{ route('admin.logout') }}" class="nav-link px-3">
+                <span class="">Đăng xuất</span>
+            </a>
         </li>
     </ul>
 
