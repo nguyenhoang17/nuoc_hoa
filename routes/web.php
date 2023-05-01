@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
+use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\User\CartController;
 use App\Http\Controllers\User\CheckoutController;
 use App\Http\Controllers\User\HomeController;
@@ -37,6 +38,8 @@ Route::get('/login', function () {
 Route::get('/register', function () {
     return view('user.auth.register');
 })->name('user.register');
+Route::post('/login/authenticate', [LoginController::class,'loginUser'])->name('user.login.authenticate');
+Route::post('/register/authenticate', [RegisterController::class,'registerUser'])->name('user.register.authenticate');
 
 
 //Admin
