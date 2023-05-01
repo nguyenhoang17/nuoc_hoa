@@ -1,13 +1,16 @@
 @extends('admin.layouts.master')
 @section('title')
-    <title>Tạo danh mục</title>
+    <title>Sửa danh mục</title>
 @endsection
 @section('content')
     <div class="card card-primary">
-        <form action="{{route('admin.categories.store')}}" method="POST" enctype="multipart/form-data">
+        <form action="{{route('admin.brands.update', $brand->id)}}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="row">
                 <div class="col-4 image__upload">
+                    <div class="view_image" id="view_image">
+                        <img src="{{url(Storage::url($brand->image))}}" alt="">
+                    </div>
                     <div class="preview">
                         <img id="file-ip-1-preview">
                     </div>
@@ -20,18 +23,18 @@
                 <div class="col-8 card-body">
                     <div class="form-group">
                         <label for="exampleInputEmail1">Tên danh mục</label>
-                        <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Tên danh mục" name="name" value="{{old('name')}}">
+                        <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Tên danh mục" name="name" value="@if(!empty(old("name"))){{old("name")}}@else {{$brand->name}}@endif">
                         @error('name')
                         <span class="error">{{ $message }}</span>
                         @enderror
                     </div>
                     <div class="form-group">
                         <label for="exampleInputPassword1">Mô tả</label>
-                        <textarea type="text" class="form-control" id="exampleInputPassword1" placeholder="Mô tả" name="description">{{old('description')}}</textarea>
+                        <textarea type="text" class="form-control" id="exampleInputPassword1" placeholder="Mô tả" name="description">@if(!empty(old("description"))){{old("description")}}@else {{$brand->description}}@endif</textarea>
                     </div>
                     <div class="float-right">
-                        <a href="{{route('admin.categories.list')}}" type="" class="btn btn-secondary">Huỷ</a>
-                        <button type="submit" class="btn btn-primary">Thêm</button>
+                        <a href="{{route('admin.brands.list')}}" type="" class="btn btn-secondary">Huỷ</a>
+                        <button type="submit" class="btn btn-primary">Cập nhật</button>
                     </div>
                 </div>
             </div>
@@ -44,6 +47,17 @@
                 padding-top: 25px;
                 width: 50%;
                 margin: auto;
+            }
+            .view_image{
+                padding-top: 25px;
+                width: 50%;
+                margin: auto;
+            }
+            .view_image img{
+                width:100%;
+                height: 165px;
+                margin-bottom:30px;
+                position: relative;
             }
             .preview img{
                 width:100%;
@@ -83,6 +97,8 @@
             if(event.target.files.length > 0){
                 var src = URL.createObjectURL(event.target.files[0]);
                 var preview = document.getElementById("file-ip-1-preview");
+                var view_image = document.getElementById('view_image');
+                view_image.style.display = 'none';
                 preview.src = src;
                 preview.style.display = "block";
             }

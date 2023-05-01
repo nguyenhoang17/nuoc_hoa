@@ -1,51 +1,51 @@
 @extends('admin.layouts.master')
 @section('title')
-    <title>Danh sách danh mục</title>
+    <title>Danh sách nhãn hiệu</title>
 @endsection
 @section('content')
     <div class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0 text-dark">Danh mục</h1>
+                    <h1 class="m-0 text-dark">Nhãn hiệu</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
-                        <li class="breadcrumb-item active">Danh mục</li>
+                        <li class="breadcrumb-item active">Nhãn hiệu</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
         </div><!-- /.container-fluid -->
     </div>
     <div class="card-body">
-        <a href="{{route('admin.categories.create')}}" class="btn-primary px-2 py-2 mb-3 border-0 float-right text-white " style="cursor: pointer">Thêm mới</a>
+        <a href="{{route('admin.brands.create')}}" class="btn-primary px-2 py-2 mb-3 border-0 float-right text-white " style="cursor: pointer">Thêm mới</a>
         <table class="table table-bordered" style="margin-bottom: 10px">
             <thead>
             <tr>
                 <th class="text-center" style="width: 10px">STT</th>
                 <th class="text-center" style="width: 100px">Ảnh</th>
-                <th style="min-width: 250px">Tên danh mục</th>
+                <th style="min-width: 250px">Tên nhãn hiệu</th>
                 <th>Mô tả</th>
                 <th class="text-center" style="width: 150px">Hành động</th>
             </tr>
             </thead>
             <tbody>
-            @if(count($categories) > 0)
-                @foreach($categories as $key => $category)
+            @if(count($brands) > 0)
+                @foreach($brands as $key => $brand)
             <tr>
                 <td>{{$key}}</td>
                 <td>
                     <img style="width: 90px;
                             object-fit: cover;
                             height: 50px;
-                            background-size: cover;" src="{{url(Storage::url($category->image))}}" alt="">
+                            background-size: cover;" src="{{url(Storage::url($brand->image))}}" alt="">
                 </td>
-                <td style="width: 200px">{{$category->name}}</td>
-                <td>{{$category->description}}</td>
+                <td style="width: 200px">{{$brand->name}}</td>
+                <td>{{$brand->description}}</td>
                 <td class="text-center">
-                    <a href="{{route('admin.categories.edit',$category->id)}}" type="button" class= "btn-edit text-primary"><i class="fa-solid fa-pen-to-square"></i></a>
-                    <form action="{{route('admin.categories.delete',$category->id)}}" method="POST" style="display: inline-block">
+                    <a href="{{route('admin.brands.edit',$brand->id)}}" type="button" class= "btn-edit text-primary"><i class="fa-solid fa-pen-to-square"></i></a>
+                    <form action="{{route('admin.brands.delete',$brand->id)}}" method="POST" style="display: inline-block">
                         @csrf
                         <input type="hidden" name="_method" value="delete">
                         <button id="delete" onclick="deleteBorder()" style="margin-left:10px; border: none" type="submit" class= "btn-delete text-danger"><i class="fa-solid fa-trash"></i></button>
@@ -54,11 +54,11 @@
             </tr>
                 @endforeach
             @else
-                <div class="text-danger">Chưa có danh mục nào để hiển thị, vui lòng thêm danh mục!!!</div>
+                <div class="text-danger">Chưa có nhãn hiệu nào để hiển thị, vui lòng thêm nhãn hiệu!!!</div>
             @endif
             </tbody>
         </table>
-        <div style="float: right">{{ $categories->links() }}</div>
+        <div style="float: right">{{ $brands->links() }}</div>
     </div>
     <style>
         #delete:focus{

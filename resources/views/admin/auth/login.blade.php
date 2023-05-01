@@ -1,6 +1,7 @@
 @extends('admin.auth.auth_layouts')
 @section('content')
     <div class="card-body login-card-body">
+        <h2 class="text-success text-center">Nước hoa Trung Kiên</h2>
         <p class="login-box-msg">Đăng nhập để bắt đầu làm việc</p>
 
         <form action="{{route('admin.login.authenticate')}}" method="post">
@@ -39,16 +40,16 @@
             </div>
             <div class="row mt-3">
                 <div class="col-8">
-                    <div class="icheck-primary">
-                        <input type="checkbox" id="remember">
-                        <label for="remember">
-                            Remember Me
-                        </label>
-                    </div>
+{{--                    <div class="icheck-primary">--}}
+{{--                        <input type="checkbox" id="remember">--}}
+{{--                        <label for="remember">--}}
+{{--                            Remember Me--}}
+{{--                        </label>--}}
+{{--                    </div>--}}
                 </div>
                 <!-- /.col -->
                 <div class="col-4">
-                    <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+                    <button style="width: 99px" type="submit" class="btn btn-success btn-block">Đăng nhập</button>
                 </div>
                 <!-- /.col -->
             </div>

@@ -32,8 +32,8 @@
                     </p>
                 </a>
             </li>
-            <li class="nav-item has-treeview">
-                <a href="#" class="nav-link">
+            <li class="nav-item has-treeview  ">
+                <a href="{{route('admin.brands.list')}}" class="nav-link @if(request()-> routeIs('admin.brands.*')) active @endif">
                     <i class="nav-icon fa-solid fa-landmark"></i>
                     <p>
                         Quản lý nhãn hiệu

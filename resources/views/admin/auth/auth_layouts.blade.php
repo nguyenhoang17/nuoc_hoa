@@ -19,10 +19,10 @@
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>
 <body class="hold-transition register-page">
+<div style="position: absolute; top:0; opacity: 0.5; width: 100%;height: 100vh">
+    <img width="100%" style="height: 100%" src="https://nuoctinhkhietquan2.com/img_data/images/nuoc-khoang-va-nuoc-tinh-khiet-co-phai-la-mot-02.jpg" alt="">
+</div>
 <div class="register-box">
-    <div class="register-logo">
-        <a href="../../index2.html"><b>Admin</b>LTE</a>
-    </div>
     <div class="card">
         @yield('content')
     </div>
@@ -36,6 +36,10 @@
     <!-- AdminLTE App -->
     <script src="/admin/dist/js/adminlte.min.js"></script>
     @yield('js')
+<script>
+    var x = screen.height;
+    console.log(x);
+</script>
     </body>
     </html>
 

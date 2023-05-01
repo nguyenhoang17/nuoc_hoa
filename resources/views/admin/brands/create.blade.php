@@ -4,7 +4,7 @@
 @endsection
 @section('content')
     <div class="card card-primary">
-        <form action="{{route('admin.categories.store')}}" method="POST" enctype="multipart/form-data">
+        <form action="{{route('admin.brands.store')}}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="row">
                 <div class="col-4 image__upload">
@@ -19,7 +19,7 @@
                 </div>
                 <div class="col-8 card-body">
                     <div class="form-group">
-                        <label for="exampleInputEmail1">Tên danh mục</label>
+                        <label for="exampleInputEmail1">Tên nhãn hiệu</label>
                         <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Tên danh mục" name="name" value="{{old('name')}}">
                         @error('name')
                         <span class="error">{{ $message }}</span>
@@ -30,7 +30,7 @@
                         <textarea type="text" class="form-control" id="exampleInputPassword1" placeholder="Mô tả" name="description">{{old('description')}}</textarea>
                     </div>
                     <div class="float-right">
-                        <a href="{{route('admin.categories.list')}}" type="" class="btn btn-secondary">Huỷ</a>
+                        <a href="{{route('admin.brands.list')}}" type="" class="btn btn-secondary">Huỷ</a>
                         <button type="submit" class="btn btn-primary">Thêm</button>
                     </div>
                 </div>

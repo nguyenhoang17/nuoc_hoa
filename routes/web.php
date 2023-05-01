@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
@@ -29,6 +30,15 @@ Route::get('/admin/login', function () {
 Route::post('/admin/login/authenticate', [LoginController::class,'login'])->name('admin.login.authenticate');
 Route::get('/admin/logout', [LogoutController::class,'logoutAdmin'])->name('admin.logout');
 
+//User auth
+Route::get('/login', function () {
+    return view('user.auth.login');
+})->name('user.login');
+Route::get('/register', function () {
+    return view('user.auth.register');
+})->name('user.register');
+
+
 //Admin
 Route::group([
     'namespace'=>'Admin',
@@ -36,6 +46,7 @@ Route::group([
     'middleware' =>['admin','preventBackHistory'],
 ],function(){
     Route::get('/dashboard',[DashboardController::class,'index'])->name('admin.dashboard');
+    //Danh mục
     Route::prefix('categories')->name('admin.categories.')->group(function () {
         Route::get('/',[CategoryController::class,'index'])->name('list');
         Route::get('/create',[CategoryController::class,'create'])->name('create');
@@ -43,7 +54,17 @@ Route::group([
         Route::get('/edit/{id}',[CategoryController::class,'edit'])->name('edit');
         Route::post('/update/{id}',[CategoryController::class,'update'])->name('update');
         Route::delete('/{id}',[CategoryController::class,'delete'])->name('delete');
-        });
+    });
+
+    //Nhãn hiệu
+    Route::prefix('brands')->name('admin.brands.')->group(function () {
+        Route::get('/',[BrandController::class,'index'])->name('list');
+        Route::get('/create',[BrandController::class,'create'])->name('create');
+        Route::post('/store',[BrandController::class,'store'])->name('store');
+        Route::get('/edit/{id}',[BrandController::class,'edit'])->name('edit');
+        Route::post('/update/{id}',[BrandController::class,'update'])->name('update');
+        Route::delete('/{id}',[BrandController::class,'delete'])->name('delete');
+    });
 });
 
 
