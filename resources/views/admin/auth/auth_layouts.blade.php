@@ -37,8 +37,6 @@
     <script src="/admin/dist/js/adminlte.min.js"></script>
     @yield('js')
 <script>
-    var x = screen.height;
-    console.log(x);
 </script>
     </body>
     </html>

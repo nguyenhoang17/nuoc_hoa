@@ -29,6 +29,8 @@ class User extends Authenticatable
     ];
     const STATUS_UNLOCKED = 1;
     const STATUS_LOCKED = 0;
+
+    protected $appends = ['status_text','gender_text'];
     protected $table = 'users';
     protected $fillable = [
         'name',
@@ -70,4 +72,24 @@ class User extends Authenticatable
      *
      * @var array
      */
+
+    public function getGenderTextAttribute()
+    {
+        if($this->gender == self::GENDER_MALE){
+            $name = 'Nam';
+        }
+        else{
+            $name = 'Nữ';
+        }
+        return $name;
+    }
+    public function getStatusTextAttribute()
+    {
+        if($this->status == self::STATUS_UNLOCKED){
+            $name = 'Tài khoản đang hoạt động';
+        } else{
+            $name = 'Tài khoản bị khoá';
+        }
+        return $name;
+    }
 }

@@ -57,7 +57,7 @@
                 </a>
             </li>
             <li class="nav-item has-treeview">
-                <a href="#" class="nav-link">
+                <a href="{{route('admin.users.list')}}" class="nav-link @if(request()-> routeIs('admin.users.*')) active @endif">
                     <i class="nav-icon fa-solid fa-user"></i>
                     <p>
                         Quản lý khách hàng

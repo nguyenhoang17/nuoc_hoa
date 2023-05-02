@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegisterController;
@@ -67,6 +68,14 @@ Route::group([
         Route::get('/edit/{id}',[BrandController::class,'edit'])->name('edit');
         Route::post('/update/{id}',[BrandController::class,'update'])->name('update');
         Route::delete('/{id}',[BrandController::class,'delete'])->name('delete');
+    });
+
+    //Khách hàng
+    Route::prefix('users')->name('admin.users.')->group(function () {
+        Route::get('/',[UserController::class,'index'])->name('list');
+        Route::put('/lock/{id}',[UserController::class,'lock'])->name('lock');
+        Route::put('/unlock/{id}',[UserController::class,'unLock'])->name('unLock');
+        Route::delete('/{id}',[UserController::class,'delete'])->name('delete');
     });
 });
 
