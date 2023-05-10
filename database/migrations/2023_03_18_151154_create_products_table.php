@@ -16,12 +16,14 @@ return new class extends Migration
             $table->string('name');
             $table->text('description')->nullable();
             $table->integer('quantity');
-            $table->string('input_price');
-            $table->string('output_price');
-            $table->integer('percentage_discount')->default(0);
+            $table->bigInteger('input_price');
+            $table->bigInteger('output_price');
+            $table->string('image');
+            $table->bigInteger('sale_price');
             $table->integer('staff_id');
             $table->integer('brand_id');
-            $table->integer('status')->default(0);
+            $table->integer('category_id');
+            $table->integer('status')->default(1);
             $table->softDeletes();
             $table->timestamps();
         });

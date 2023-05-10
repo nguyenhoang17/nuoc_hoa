@@ -41,7 +41,7 @@
                 </a>
             </li>
             <li class="nav-item has-treeview">
-                <a href="#" class="nav-link">
+                <a href="{{route('admin.products.list')}}" class="nav-link @if(request()-> routeIs('admin.products.*')) active @endif">
                     <i class="nav-icon fa-solid fa-flask"></i>
                     <p>
                         Quản lý sản phẩm

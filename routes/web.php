@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\ProductController as ProductAdminController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegisterController;
@@ -77,6 +78,17 @@ Route::group([
         Route::put('/unlock/{id}',[UserController::class,'unLock'])->name('unLock');
         Route::delete('/{id}',[UserController::class,'delete'])->name('delete');
     });
+
+    //Sản phẩm
+    Route::prefix('products')->name('admin.products.')->group(function () {
+        Route::get('/',[ProductAdminController::class,'index'])->name('list');
+        Route::get('/create',[ProductAdminController::class,'create'])->name('create');
+        Route::post('/store',[ProductAdminController::class,'store'])->name('store');
+        Route::get('/edit/{id}',[ProductAdminController::class,'edit'])->name('edit');
+        Route::post('/update/{id}',[ProductAdminController::class,'update'])->name('update');
+        Route::delete('/{id}',[ProductAdminController::class,'delete'])->name('delete');
+    });
+
 });
 
 
