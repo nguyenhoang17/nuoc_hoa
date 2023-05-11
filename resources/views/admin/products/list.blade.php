@@ -1,6 +1,6 @@
 @extends('admin.layouts.master')
 @section('title')
-    <title>Tạo sản phẩm</title>
+    <title>Danh sách sản phẩm</title>
 @endsection
 @section('content')
     <div class="content-header">
@@ -20,7 +20,7 @@
     </div>
     <div class="card-body">
         <a href="{{route('admin.products.create')}}" class="btn-primary px-2 py-2 mb-3 border-0 float-right text-white " style="cursor: pointer">Thêm mới</a>
-        <table class="table table-hover text-nowrap">
+        <table class="table text-nowrap">
             <thead>
             <tr>
                 <th>Stt</th>
@@ -37,21 +37,37 @@
             </tr>
             </thead>
             <tbody>
+            @if(count($products) > 0)
+                @foreach($products as $key => $product)
                 <tr>
-                    <td> </td>
-                    <td style= "color: blue"><a href =""></a></td>
+                    <td>{{$key}}</td>
+                    <td style= "color: blue"><a href ="">{{$product->name}}</a></td>
                     <td>
-                        <img src=""width="100px" height="80px">
-
+                        <img style="width: 100px;
+                            object-fit: cover;
+                            height: 50px;
+                            background-size: cover;" src="{{url(Storage::url($product->image))}}">
                     </td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td>{{$product->category->name}}</td>
+                    <td>{{$product->brand->name}}</td>
+                    <td>{{$product->quantity}}</td>
+                    <td>{{number_format($product->input_price)}}đ</td>
+                    <td>{{number_format($product->output_price)}}đ</td>
+                    <td>{{number_format((($product->output_price - $product->sale_price)/$product->output_price)*100 , 2)}}%</td>
+                    <td>{{$product->status_text}}</td>
+                    <td class="text-center">
+                        <a href="{{route('admin.products.edit',$product->id)}}" type="button" class= "btn-edit text-primary"><i class="fa-solid fa-pen-to-square"></i></a>
+                        <form action="{{route('admin.products.delete',$product->id)}}" method="POST" style="display: inline-block">
+                            @csrf
+                            <input type="hidden" name="_method" value="delete">
+                            <button id="delete" onclick="deleteBorder()" style="margin-left:10px; border: none" type="submit" class= "btn-delete text-danger"><i class="fa-solid fa-trash"></i></button>
+                        </form>
+                    </td>
+                </tr>
+                @endforeach
+            @else
+                <div class="text-danger">Chưa có sản phẩm nào để hiển thị, vui lòng thêm danh mục!!!</div>
+            @endif
             </tbody>
         </table>
     </div>

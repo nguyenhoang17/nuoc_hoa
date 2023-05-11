@@ -31,4 +31,8 @@ class Brand extends Model
         self::DEFAULT_STATUS => 'Mặc định',
         self::ASSIGNED_STATUS => 'Đã gán với sản phẩm'
     ];
+
+    public function products() {
+        return $this->hasMany(Product::class);
+    }
 }

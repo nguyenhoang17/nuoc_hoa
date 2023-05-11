@@ -32,5 +32,8 @@ class Category extends Model
         self::ASSIGNED_STATUS => 'Đã gán với sản phẩm'
     ];
 
+    public function products() {
+        return $this->hasMany(Product::class);
+    }
 
 }

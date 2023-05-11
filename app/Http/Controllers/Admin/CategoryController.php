@@ -9,6 +9,7 @@ use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class CategoryController extends Controller
 {
@@ -42,11 +43,10 @@ class CategoryController extends Controller
             return redirect()->route('admin.categories.list');
         } catch (\Exception $exception){
             DB::rollBack();
-            \log::error([
+            Log::error([
                 'method' => __METHOD__,
                 'line' => __LINE__,
                 'message' => $exception->getMessage(),
-                'user_id' => Auth::id(),
                 'data' => $request->all()
             ]);
             $request->session()->flash('error','Tạo danh mục mới không thành công');
@@ -59,11 +59,10 @@ class CategoryController extends Controller
             $category = Category::findOrFail($id);
             return view('admin.categories.edit',['category' =>$category]);
         } catch (\Exception $exception){
-            \log::error([
+            Log::error([
                 'method' => __METHOD__,
                 'line' => __LINE__,
                 'message' => $exception->getMessage(),
-                'user_id' => Auth::id(),
             ]);
         }
     }
@@ -87,11 +86,10 @@ class CategoryController extends Controller
             return redirect()->route('admin.categories.list');
         } catch (\Exception $exception){
             DB::rollBack();
-            \log::error([
+            Log::error([
                 'method' => __METHOD__,
                 'line' => __LINE__,
                 'message' => $exception->getMessage(),
-                'user_id' => Auth::id(),
                 'data' => $request->all()
             ]);
             $request->session()->flash('error','Cập nhật danh mục mới không thành công');
@@ -105,7 +103,7 @@ class CategoryController extends Controller
             Category::destroy($id);
             return redirect()-> route('admin.categories.list')->with('success', 'Xoá danh mục thành công');
         }catch (\Exception $exception){
-            \Log::error([
+            Log::error([
                 'method' => __METHOD__,
                 'line' => __LINE__,
                 'message' => $exception->getMessage(),

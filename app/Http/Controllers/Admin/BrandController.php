@@ -9,6 +9,7 @@ use App\Models\Brand;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class BrandController extends Controller
 {
@@ -42,11 +43,10 @@ class BrandController extends Controller
             return redirect()->route('admin.brands.list');
         } catch (\Exception $exception){
             DB::rollBack();
-            \log::error([
+            Log::error([
                 'method' => __METHOD__,
                 'line' => __LINE__,
                 'message' => $exception->getMessage(),
-                'user_id' => Auth::id(),
                 'data' => $request->all()
             ]);
             $request->session()->flash('error','Tạo nhãn hiệu mới không thành công');
@@ -59,11 +59,10 @@ class BrandController extends Controller
             $brand = Brand::findOrFail($id);
             return view('admin.brands.edit',['brand' =>$brand]);
         } catch (\Exception $exception){
-            \log::error([
+            Log::error([
                 'method' => __METHOD__,
                 'line' => __LINE__,
                 'message' => $exception->getMessage(),
-                'user_id' => Auth::id(),
             ]);
         }
     }
@@ -87,11 +86,10 @@ class BrandController extends Controller
             return redirect()->route('admin.brands.list');
         } catch (\Exception $exception){
             DB::rollBack();
-            \log::error([
+            Log::error([
                 'method' => __METHOD__,
                 'line' => __LINE__,
                 'message' => $exception->getMessage(),
-                'user_id' => Auth::id(),
                 'data' => $request->all()
             ]);
             $request->session()->flash('error','Cập nhật nhãn hiệu mới không thành công');
@@ -105,7 +103,7 @@ class BrandController extends Controller
             Brand::destroy($id);
             return redirect()-> route('admin.brands.list')->with('success', 'Xoá nhãn hiệu thành công');
         }catch (\Exception $exception){
-            \Log::error([
+            Log::error([
                 'method' => __METHOD__,
                 'line' => __LINE__,
                 'message' => $exception->getMessage(),

@@ -85,7 +85,7 @@ Route::group([
         Route::get('/create',[ProductAdminController::class,'create'])->name('create');
         Route::post('/store',[ProductAdminController::class,'store'])->name('store');
         Route::get('/edit/{id}',[ProductAdminController::class,'edit'])->name('edit');
-        Route::post('/update/{id}',[ProductAdminController::class,'update'])->name('update');
+        Route::put('/update/{id}',[ProductAdminController::class,'update'])->name('update');
         Route::delete('/{id}',[ProductAdminController::class,'delete'])->name('delete');
     });
 

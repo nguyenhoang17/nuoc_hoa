@@ -27,16 +27,32 @@ class Product extends Model
         'status'
     ];
 
-    public function getStatusTextAttrbute()
-    {
-        return $this->statusArr[$this->status];
-    }
-
-
+    protected $appends = ['status_text'];
 
     public $statusArr = [
         self::STILL_IN_BUSINESS => 'Đang kinh doanh',
         self::STOP_BUSINESS => 'Ngưng kinh doanh'
     ];
+
+    static $status_Arr = [
+        'STILL_IN_BUSINESS' => 1,
+        'STOP_BUSINESS' => 2
+    ];
+
+    public function getStatusTextAttribute()
+    {
+        if ($this->status == self::STILL_IN_BUSINESS) {
+            return 'Đang kinh doanh';
+        } elseif ($this->status == self::STOP_BUSINESS) {
+            return 'Ngưng kinh doanh';
+        }
+    }
+    public function category() {
+        return $this->belongsTo(Category::class,'category_id');
+    }
+
+    public function brand() {
+        return $this->belongsTo(Brand::class,'brand_id');
+    }
 
 }
