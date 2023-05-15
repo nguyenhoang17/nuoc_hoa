@@ -46,7 +46,7 @@ class ProductController extends Controller
                     $query->where('output_price', '>', 5000000);
                 }
             }
-            $products = $query->paginate(15);
+            $products = $query->orderBy('created_at','desc')->paginate(15);
             return view('admin.products.list', ['products' => $products, 'categories' => $categories, 'brands'=> $brands]);
         } catch (\Exception $exception) {
             Log::error([

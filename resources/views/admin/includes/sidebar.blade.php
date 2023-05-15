@@ -49,7 +49,7 @@
                 </a>
             </li>
             <li class="nav-item has-treeview">
-                <a href="#" class="nav-link">
+                <a href="{{route('admin.orders.list')}}" class="nav-link @if(request()-> routeIs('admin.orders.*')) active @endif">
                     <i class="nav-icon fa-solid fa-cart-shopping"></i>
                     <p>
                         Quản lý đơn hàng

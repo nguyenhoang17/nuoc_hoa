@@ -92,10 +92,11 @@
                         <h3>Hoá đơn chi tiết</h3>
                         <form
                             class="row contact_form"
-                            action="#"
+                            action="{{route('user.orders.store')}}"
                             method="post"
                             novalidate="novalidate"
                         >
+                            @csrf
                             <div class="col-md-12 form-group p_star">
                                 <div class="d-flex justify-content-between">
                                     <label for="email" class="form-label">Tên người nhận<span class="text-danger">*</span></label>
@@ -108,6 +109,9 @@
                                     value="{{auth()->guard('web')->user()->name}}"
                                     name="name" placeholder="Tên khách hàng"
                                 />
+                                @error('name')
+                                <span class="error" >{{ $message }}</span>
+                                @enderror
                             </div>
 {{--                            <div class="col-md-12 form-group">--}}
 {{--                                <input--}}
@@ -158,6 +162,9 @@
                                     placeholder="Nhập địa chỉ"
                                     value="@if(auth()->guard('web')->user()->address) {{auth()->guard('web')->user()->address}}@endif"
                                 />
+                                @error('address')
+                                <span class="error" >{{ $message }}</span>
+                                @enderror
                             </div>
 {{--                            <div class="col-md-12 form-group p_star">--}}
 {{--                                <input--}}
@@ -201,13 +208,12 @@
                             <div class="col-md-12 form-group">
                                 <textarea
                                     class="form-control"
-                                    name="message"
+                                    name="note"
                                     id="message"
                                     rows="1"
                                     placeholder="Chú ý khi giao hàng"
                                 ></textarea>
                             </div>
-                        </form>
                     </div>
                     <div class="col-lg-7">
                         <div class="order_box">
@@ -262,11 +268,17 @@
 {{--                                    Store State / County, Store Postcode.--}}
 {{--                                </p>--}}
 {{--                            </div>--}}
-                            <a class="main_btn" href="{{route('user.orders.store')}}">Tiến hành thanh toán</a>
+                            <button class="btn btn-success mt-2" type="submit">Tiến hành thanh toán</button>
+                            </form>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+    <style>
+        .error {
+            color: red;
+        }
+    </style>
 @endsection

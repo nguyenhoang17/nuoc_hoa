@@ -19,7 +19,7 @@ class BrandController extends Controller
         if($request->input('q')) {
             $query->where('name', 'like', '%' . $request->input('q') . '%');
         }
-        $brands = $query->paginate(10);
+        $brands = $query->orderBy('created_at','desc')->paginate(10);
         return view('admin.brands.list',['brands' =>$brands]);
     }
 

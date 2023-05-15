@@ -16,7 +16,7 @@ class UserController extends Controller
         if($request->input('status')) {
             $query->where('status',$request->input('status'));
         }
-        $users = $query->paginate(10);
+        $users = $query->orderBy('created_at','desc')->paginate(10);
         return view('admin.users.list',['users'=>$users]);
     }
 

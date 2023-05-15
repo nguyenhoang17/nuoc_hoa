@@ -11,6 +11,7 @@ use App\Http\Controllers\User\CartController;
 use App\Http\Controllers\User\CheckoutController;
 use App\Http\Controllers\User\HomeController;
 use App\Http\Controllers\User\OrderController;
+use App\Http\Controllers\Admin\OrderController as Order;
 use App\Http\Controllers\User\UserController as MyAccount;
 use App\Http\Controllers\User\ProductCategoryController;
 use App\Http\Controllers\User\ProductController;
@@ -86,6 +87,15 @@ Route::group([
         Route::delete('/{id}',[UserController::class,'delete'])->name('delete');
     });
 
+    //Đơn hàng
+    Route::prefix('orders')->name('admin.orders.')->group(function () {
+        Route::get('/',[Order::class,'index'])->name('list');
+        Route::get('/confirmed/{id}',[Order::class, 'confirmed'])->name('confirmed');
+        Route::get('/shipping/{id}',[Order::class, 'shipping'])->name('shipping');
+        Route::get('/delivered/{id}', [Order::class, 'delivered'])->name('delivered');
+        Route::get('/cancelled/{id}',[Order::class, 'cancelled'])->name('cancelled');
+    });
+
     //Sản phẩm
     Route::prefix('products')->name('admin.products.')->group(function () {
         Route::get('/',[ProductAdminController::class,'index'])->name('list');
@@ -130,7 +140,6 @@ Route::group([
     //order
     Route::prefix('orders')->name('user.orders.')->group(function (){
         Route::post('/',[OrderController::class, 'store'])->name('store');
+        Route::get('/{id}',[OrderController::class, 'index'])->name('list');
     });
-
-
 });
