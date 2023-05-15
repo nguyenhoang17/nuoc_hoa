@@ -25,10 +25,10 @@ class User extends Authenticatable
     const GENDER_FEMALE = 0;
     const STATUS = [
         'ACTIVE' => 1,
-        'DE_ACTIVE' => 0
+        'DE_ACTIVE' => 2
     ];
     const STATUS_UNLOCKED = 1;
-    const STATUS_LOCKED = 0;
+    const STATUS_LOCKED = 2;
 
     protected $appends = ['status_text','gender_text'];
     protected $table = 'users';

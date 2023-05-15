@@ -8,7 +8,7 @@
                         <p class="sub text-uppercase">Nước hoa nam</p>
                         <h3><span>Thể hiện</span> Phong cách <br />Riêng <span>Của bạn</span></h3>
                         <h4>Hãy để chúng tôi giúp bạn!</h4>
-                        <a class="main_btn mt-40" href="#">Xem bộ sưu tập</a>
+                        <a class="main_btn mt-40" href="{{route('user.category')}}">Xem bộ sưu tập</a>
                     </div>
                 </div>
             </div>
@@ -77,88 +77,40 @@
             </div>
 
             <div class="row">
+                @if($outstandingProducts)
+                    @foreach($outstandingProducts as $outstandingProduct)
                 <div class="col-lg-4 col-md-6">
                     <div class="single-product">
                         <div class="product-img">
-                            <img class="img-fluid w-100" src="./user/img/demo.jpg" alt="" />
+                            <img class="img-fluid w-100" src="{{url(Storage::url($outstandingProduct->image))}}" alt="" />
                             <div class="p_icon">
-                                <a href="#">
+                                <a href="{{route('user.product.detail', $outstandingProduct->id)}}">
                                     <i class="ti-eye"></i>
                                 </a>
-                                <a href="#">
-                                    <i class="ti-heart"></i>
-                                </a>
-                                <a href="#">
+{{--                                <a href="#">--}}
+{{--                                    <i class="ti-heart"></i>--}}
+{{--                                </a>--}}
+                                <a href="{{route('user.carts.add', $outstandingProduct->id)}}">
                                     <i class="ti-shopping-cart"></i>
                                 </a>
                             </div>
                         </div>
                         <div class="product-btm">
-                            <a href="#" class="d-block">
-                                <h4>Nước Hoa Nam Jean Paul Gaultter Le Beau</h4>
+                            <a href="{{route('user.product.detail', $outstandingProduct->id)}}" class="d-block">
+                                <h4>{{$outstandingProduct->name}}</h4>
                             </a>
                             <div class="mt-3">
-                                <span class="mr-4">1.000.000vnđ</span>
-                                <del>1.500.000vnd</del>
+                                <span class="mr-4">{{number_format($outstandingProduct->sale_price)}} đ</span>
+                                @if($outstandingProduct->sale_price < $outstandingProduct->output_price)
+                                    <del>{{number_format($outstandingProduct->output_price)}} đ</del>
+                                @endif
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="col-lg-4 col-md-6">
-                    <div class="single-product">
-                        <div class="product-img">
-                            <img class="img-fluid w-100" src="./user/img/demo.jpg" alt="" />
-                            <div class="p_icon">
-                                <a href="#">
-                                    <i class="ti-eye"></i>
-                                </a>
-                                <a href="#">
-                                    <i class="ti-heart"></i>
-                                </a>
-                                <a href="#">
-                                    <i class="ti-shopping-cart"></i>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="product-btm">
-                            <a href="#" class="d-block">
-                                <h4>Nước Hoa Nam Jean Paul Gaultter Le Beau</h4>
-                            </a>
-                            <div class="mt-3">
-                                <span class="mr-4">1.000.000vnđ</span>
-                                <del>1.500.000vnd</del>
-                            </div>
-                        </div>
-                    </div>
                 </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="single-product">
-                        <div class="product-img">
-                            <img class="img-fluid w-100" src="./user/img/demo.jpg" alt="" />
-                            <div class="p_icon">
-                                <a href="#">
-                                    <i class="ti-eye"></i>
-                                </a>
-                                <a href="#">
-                                    <i class="ti-heart"></i>
-                                </a>
-                                <a href="#">
-                                    <i class="ti-shopping-cart"></i>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="product-btm">
-                            <a href="#" class="d-block">
-                                <h4>Nước Hoa Nam Jean Paul Gaultter Le Beau</h4>
-                            </a>
-                            <div class="mt-3">
-                                <span class="mr-4">1.000.000vnđ</span>
-                                <del>1.500.000vnd</del>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                    @endforeach
+                @endif
             </div>
         </div>
     </section>
@@ -170,10 +122,9 @@
             <div class="row justify-content-center">
                 <div class="offset-lg-4 col-lg-6 text-center">
                     <div class="offer_content">
-                        <h3 class="text-uppercase mb-40">Tất cả bộ sưu tập cho nữ</h3>
-                        <h2 class="text-uppercase">Giảm 50%</h2>
-                        <a href="#" class="main_btn mb-20 mt-5">Khám phá ngay</a>
-                        <p>Thời gian có hạn</p>
+                        <h3 class="text-uppercase mb-40">Hương thơm tạo nên sự</h3>
+                        <h2 class="text-uppercase">khác biệt</h2>
+                        <a href="{{route('user.category')}}" class="main_btn mb-20 mt-5">Khám phá ngay</a>
                     </div>
                 </div>
             </div>
@@ -194,133 +145,43 @@
             </div>
 
             <div class="row">
-                <div class="col-lg-6">
-                    <div class="new_product">
-                        <h5 class="text-uppercase">Bộ sưu tập 2023</h5>
-                        <h3 class="text-uppercase">Nước hoa cho nam và nữ</h3>
-                        <div class="product-img">
-                            <img class="img-fluid" src="./user/img/demo.jpg" alt="" />
-                        </div>
-                        <h4>1.000.000 vnđ</h4>
-                        <a href="#" class="main_btn">Thêm vào giỏ hàng</a>
-                    </div>
-                </div>
-
                 <div class="col-lg-6 mt-5 mt-lg-0">
-                    <div class="row">
-                        <div class="col-lg-6 col-md-6">
-                            <div class="single-product">
-                                <div class="product-img">
-                                    <img class="img-fluid w-100" src="./user/img/demo.jpg" alt="" />
-                                    <div class="p_icon">
-                                        <a href="#">
-                                            <i class="ti-eye"></i>
-                                        </a>
-                                        <a href="#">
-                                            <i class="ti-heart"></i>
-                                        </a>
-                                        <a href="#">
-                                            <i class="ti-shopping-cart"></i>
-                                        </a>
+                        <div class="row">
+                            @if($lastProducts)
+                                @foreach($lastProducts as $lastProduct)
+                                    <div class="col-lg-6 col-md-6">
+                                        <div class="single-product">
+                                            <div class="product-img">
+                                                <img class="img-fluid w-100" src="{{url(Storage::url($lastProduct->image))}}" alt="" />
+                                                <div class="p_icon">
+                                                    <a href="{{route('user.product.detail', $lastProduct->id)}}">
+                                                        <i class="ti-eye"></i>
+                                                    </a>
+                                                    {{--                                        <a href="#">--}}
+                                                    {{--                                            <i class="ti-heart"></i>--}}
+                                                    {{--                                        </a>--}}
+                                                    <a href="{{route('user.carts.add', $lastProduct->id)}}">
+                                                        <i class="ti-shopping-cart"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="product-btm">
+                                                <a href="{{route('user.product.detail', $lastProduct->id)}}" class="d-block">
+                                                    <h4>{{$lastProduct->name}}</h4>
+                                                </a>
+                                                <div class="mt-3">
+                                                    <span class="mr-4">{{number_format($lastProduct->sale_price)}} đ</span>
+                                                    @if($lastProduct->sale_price < $lastProduct->output_price)
+                                                        <del>{{number_format($lastProduct->output_price)}} đ</del>
+                                                    @endif
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="product-btm">
-                                    <a href="#" class="d-block">
-                                        <h4>Jean Paul Gaultter</h4>
-                                    </a>
-                                    <div class="mt-3">
-                                        <span class="mr-4">1.000.000 vnđ</span>
-                                        <del>1.000.000 vnđ</del>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-6 col-md-6">
-                            <div class="single-product">
-                                <div class="product-img">
-                                    <img class="img-fluid w-100" src="./user/img/demo.jpg" alt="" />
-                                    <div class="p_icon">
-                                        <a href="#">
-                                            <i class="ti-eye"></i>
-                                        </a>
-                                        <a href="#">
-                                            <i class="ti-heart"></i>
-                                        </a>
-                                        <a href="#">
-                                            <i class="ti-shopping-cart"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="product-btm">
-                                    <a href="#" class="d-block">
-                                        <h4>Jean Paul Gaultter</h4>
-                                    </a>
-                                    <div class="mt-3">
-                                        <span class="mr-4">1.000.000 vnđ</span>
-                                        <del>1.000.000 vnđ</del>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-6 col-md-6">
-                            <div class="single-product">
-                                <div class="product-img">
-                                    <img class="img-fluid w-100" src="./user/img/demo.jpg" alt="" />
-                                    <div class="p_icon">
-                                        <a href="#">
-                                            <i class="ti-eye"></i>
-                                        </a>
-                                        <a href="#">
-                                            <i class="ti-heart"></i>
-                                        </a>
-                                        <a href="#">
-                                            <i class="ti-shopping-cart"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="product-btm">
-                                    <a href="#" class="d-block">
-                                        <h4>Jean Paul Gaultter</h4>
-                                    </a>
-                                    <div class="mt-3">
-                                        <span class="mr-4">1.000.000 vnđ</span>
-                                        <del>1.000.000 vnđ</del>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-6 col-md-6">
-                            <div class="single-product">
-                                <div class="product-img">
-                                    <img class="img-fluid w-100" src="./user/img/demo.jpg" alt="" />
-                                    <div class="p_icon">
-                                        <a href="#">
-                                            <i class="ti-eye"></i>
-                                        </a>
-                                        <a href="#">
-                                            <i class="ti-heart"></i>
-                                        </a>
-                                        <a href="#">
-                                            <i class="ti-shopping-cart"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="product-btm">
-                                    <a href="#" class="d-block">
-                                        <h4>Jean Paul Gaultter</h4>
-                                    </a>
-                                    <div class="mt-3">
-                                        <span class="mr-4">1.000.000 vnđ</span>
-                                        <del>1.000.000 vnđ</del>
-                                    </div>
-                                </div>
-                            </div>
+                                @endforeach
+                            @endif
                         </div>
                     </div>
-                </div>
             </div>
         </div>
     </section>
@@ -339,227 +200,41 @@
             </div>
 
             <div class="row">
-                <div class="col-lg-3 col-md-6">
-                    <div class="single-product">
-                        <div class="product-img">
-                            <img class="img-fluid w-100" src="./user/img/demo.jpg" alt="" />
-                            <div class="p_icon">
-                                <a href="#">
-                                    <i class="ti-eye"></i>
-                                </a>
-                                <a href="#">
-                                    <i class="ti-heart"></i>
-                                </a>
-                                <a href="#">
-                                    <i class="ti-shopping-cart"></i>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="product-btm">
-                            <a href="#" class="d-block">
-                                <h4>X-Men</h4>
-                            </a>
-                            <div class="mt-3">
-                                <span class="mr-4">1.000.000 vnđ</span>
-                                <del>1.000.000 vnđ</del>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-md-6">
-                    <div class="single-product">
-                        <div class="product-img">
-                            <img class="img-fluid w-100" src="./user/img/demo.jpg" alt="" />
-                            <div class="p_icon">
-                                <a href="#">
-                                    <i class="ti-eye"></i>
-                                </a>
-                                <a href="#">
-                                    <i class="ti-heart"></i>
-                                </a>
-                                <a href="#">
-                                    <i class="ti-shopping-cart"></i>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="product-btm">
-                            <a href="#" class="d-block">
-                                <h4>X-Men</h4>
-                            </a>
-                            <div class="mt-3">
-                                <span class="mr-4">1.000.000 vnđ</span>
-                                <del>1.000.000 vnđ</del>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-md-6">
-                    <div class="single-product">
-                        <div class="product-img">
-                            <img class="img-fluid w-100" src="./user/img/demo.jpg" alt="" />
-                            <div class="p_icon">
-                                <a href="#">
-                                    <i class="ti-eye"></i>
-                                </a>
-                                <a href="#">
-                                    <i class="ti-heart"></i>
-                                </a>
-                                <a href="#">
-                                    <i class="ti-shopping-cart"></i>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="product-btm">
-                            <a href="#" class="d-block">
-                                <h4>X-Men</h4>
-                            </a>
-                            <div class="mt-3">
-                                <span class="mr-4">1.000.000 vnđ</span>
-                                <del>1.000.000 vnđ</del>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-md-6">
-                    <div class="single-product">
-                        <div class="product-img">
-                            <img class="img-fluid w-100" src="./user/img/demo.jpg" alt="" />
-                            <div class="p_icon">
-                                <a href="#">
-                                    <i class="ti-eye"></i>
-                                </a>
-                                <a href="#">
-                                    <i class="ti-heart"></i>
-                                </a>
-                                <a href="#">
-                                    <i class="ti-shopping-cart"></i>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="product-btm">
-                            <a href="#" class="d-block">
-                                <h4>X-Men</h4>
-                            </a>
-                            <div class="mt-3">
-                                <span class="mr-4">1.000.000 vnđ</span>
-                                <del>1.000.000 vnđ</del>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-md-6">
-                    <div class="single-product">
-                        <div class="product-img">
-                            <img class="img-fluid w-100" src="./user/img/demo.jpg" alt="" />
-                            <div class="p_icon">
-                                <a href="#">
-                                    <i class="ti-eye"></i>
-                                </a>
-                                <a href="#">
-                                    <i class="ti-heart"></i>
-                                </a>
-                                <a href="#">
-                                    <i class="ti-shopping-cart"></i>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="product-btm">
-                            <a href="#" class="d-block">
-                                <h4>X-Men</h4>
-                            </a>
-                            <div class="mt-3">
-                                <span class="mr-4">1.000.000 vnđ</span>
-                                <del>1.000.000 vnđ</del>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-md-6">
-                    <div class="single-product">
-                        <div class="product-img">
-                            <img class="img-fluid w-100" src="./user/img/demo.jpg" alt="" />
-                            <div class="p_icon">
-                                <a href="#">
-                                    <i class="ti-eye"></i>
-                                </a>
-                                <a href="#">
-                                    <i class="ti-heart"></i>
-                                </a>
-                                <a href="#">
-                                    <i class="ti-shopping-cart"></i>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="product-btm">
-                            <a href="#" class="d-block">
-                                <h4>X-Men</h4>
-                            </a>
-                            <div class="mt-3">
-                                <span class="mr-4">1.000.000 vnđ</span>
-                                <del>1.000.000 vnđ</del>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-md-6">
-                    <div class="single-product">
-                        <div class="product-img">
-                            <img class="img-fluid w-100" src="./user/img/demo.jpg" alt="" />
-                            <div class="p_icon">
-                                <a href="#">
-                                    <i class="ti-eye"></i>
-                                </a>
-                                <a href="#">
-                                    <i class="ti-heart"></i>
-                                </a>
-                                <a href="#">
-                                    <i class="ti-shopping-cart"></i>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="product-btm">
-                            <a href="#" class="d-block">
-                                <h4>X-Men</h4>
-                            </a>
-                            <div class="mt-3">
-                                <span class="mr-4">1.000.000 vnđ</span>
-                                <del>1.000.000 vnđ</del>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-md-6">
-                    <div class="single-product">
-                        <div class="product-img">
-                            <img class="img-fluid w-100" src="./user/img/demo.jpg" alt="" />
-                            <div class="p_icon">
-                                <a href="#">
-                                    <i class="ti-eye"></i>
-                                </a>
-                                <a href="#">
-                                    <i class="ti-heart"></i>
-                                </a>
-                                <a href="#">
-                                    <i class="ti-shopping-cart"></i>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="product-btm">
-                            <a href="#" class="d-block">
-                                <h4>X-Men</h4>
-                            </a>
-                            <div class="mt-3">
-                                <span class="mr-4">1.000.000 vnđ</span>
-                                <del>1.000.000 vnđ</del>
-                            </div>
-                        </div>
+                <div class="col-lg-6 mt-5 mt-lg-0">
+                    <div class="row">
+                        @if($InspirationalProducts)
+                            @foreach($InspirationalProducts as $InspirationalProduct)
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="single-product">
+                                        <div class="product-img">
+                                            <img class="img-fluid w-100" src="{{url(Storage::url($InspirationalProduct->image))}}" alt="" />
+                                            <div class="p_icon">
+                                                <a href="{{route('user.product.detail', $InspirationalProduct->id)}}">
+                                                    <i class="ti-eye"></i>
+                                                </a>
+                                                {{--                                        <a href="#">--}}
+                                                {{--                                            <i class="ti-heart"></i>--}}
+                                                {{--                                        </a>--}}
+                                                <a href="{{route('user.carts.add', $InspirationalProduct->id)}}">
+                                                    <i class="ti-shopping-cart"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="product-btm">
+                                            <a href="{{route('user.product.detail', $InspirationalProduct->id)}}" class="d-block">
+                                                <h4>{{$InspirationalProduct->name}}</h4>
+                                            </a>
+                                            <div class="mt-3">
+                                                <span class="mr-4">{{number_format($InspirationalProduct->sale_price)}} đ</span>
+                                                @if($InspirationalProduct->sale_price < $InspirationalProduct->output_price)
+                                                    <del>{{number_format($InspirationalProduct->output_price)}} đ</del>
+                                                @endif
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        @endif
                     </div>
                 </div>
             </div>

@@ -13,9 +13,13 @@ use Illuminate\Support\Facades\Log;
 
 class BrandController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $brands = Brand::paginate(10);
+        $query = Brand::query();
+        if($request->input('q')) {
+            $query->where('name', 'like', '%' . $request->input('q') . '%');
+        }
+        $brands = $query->paginate(10);
         return view('admin.brands.list',['brands' =>$brands]);
     }
 

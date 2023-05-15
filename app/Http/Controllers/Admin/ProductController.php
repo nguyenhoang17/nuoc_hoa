@@ -17,8 +17,37 @@ class ProductController extends Controller
     public function index(Request $request)
     {
         try {
-            $products = Product::with(['category', 'brand'])->paginate(15);
-            return view('admin.products.list', ['products' => $products]);
+            $categories = Category::get();
+            $brands = Brand::get();
+            $query = Product::with(['category', 'brand']);
+            if($request->input('name')) {
+                $query->where('name', 'like', '%' . $request->input('name') . '%');
+            }
+            if($request->input('category')) {
+                $query->where('category_id', $request->input('category'));
+            }
+            if($request->input('brand')) {
+                $query->where('brand_id', $request->input('brand'));
+            }
+            if($request->input('price')) {
+                if((int)$request->input('price') == (int)Product::KHOANG_GIA['100-500']){
+                    $query->whereBetween('output_price', [100000, 500000]);
+                }
+                if((int)$request->input('price') == (int)Product::KHOANG_GIA['500-1tr']){
+                    $query->whereBetween('output_price', [500000, 1000000]);
+                }
+                if((int)$request->input('price') == (int)Product::KHOANG_GIA['1tr-3tr']){
+                    $query->whereBetween('output_price', [1000000, 3000000]);
+                }
+                if((int)$request->input('price') == (int)Product::KHOANG_GIA['3tr-5tr']){
+                    $query->whereBetween('output_price', [3000000, 5000000]);
+                }
+                if((int)$request->input('price') == (int)Product::KHOANG_GIA['tren_5tr']){
+                    $query->where('output_price', '>', 5000000);
+                }
+            }
+            $products = $query->paginate(15);
+            return view('admin.products.list', ['products' => $products, 'categories' => $categories, 'brands'=> $brands]);
         } catch (\Exception $exception) {
             Log::error([
                 'method' => __METHOD__,

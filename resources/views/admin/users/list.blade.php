@@ -19,6 +19,22 @@
         </div><!-- /.container-fluid -->
     </div>
     <div class="card-body">
+        <form>
+            <div class="input-group input-group-sm" style="width: 40%; margin-bottom: 10px;">
+                <input type="text" value="" name="email" class="form-control float-right mx-1" placeholder="Nhập email để tìm kiếm">
+                <select name="status" style="border: 1px solid #ccc" id="">
+                    <option value="" disabled selected>__Chọn trạng thái__</option>
+                    <option value="{{\App\Models\User::STATUS['ACTIVE']}}">Đang hoạt động</option>
+                    <option value="{{\App\Models\User::STATUS['DE_ACTIVE']}}">Đã bị khoá</option>
+                </select>
+                <button type="submit" class="btn btn-primary" style="height:32.5px; margin-left:5px;padding-top:3px;">
+                    Lọc kết quả
+                </button>
+            </div>
+        </form>
+        <a href="{{route('admin.users.list')}}" class="btn btn-primary mb-3" style="height:32.5px; margin-left:5px;padding-top:3px; color:#fff">
+            Huỷ lọc
+        </a>
 {{--        <a href="{{route('admin.brands.create')}}" class="btn-primary px-2 py-2 mb-3 border-0 float-right text-white " style="cursor: pointer">Thêm mới</a>--}}
         <table class="table table-bordered" style="margin-bottom: 10px">
             <thead>

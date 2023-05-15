@@ -19,6 +19,17 @@
         </div><!-- /.container-fluid -->
     </div>
     <div class="card-body">
+        <form>
+            <div class="input-group input-group-sm" style="width: 30%; margin-bottom: 10px;">
+                <input type="text" value="" name="q" class="form-control float-right mx-1" placeholder="Nhập tên để tìm kiếm">
+                <button type="submit" class="btn btn-primary" style="height:32.5px; margin-left:5px;padding-top:3px;">
+                    Lọc kết quả
+                </button>
+            </div>
+        </form>
+        <a href="{{route('admin.brands.list')}}" class="btn btn-primary" style="height:32.5px; margin-left:5px;padding-top:3px; color:#fff">
+            Huỷ lọc
+        </a>
         <a href="{{route('admin.brands.create')}}" class="btn-primary px-2 py-2 mb-3 border-0 float-right text-white " style="cursor: pointer">Thêm mới</a>
         <table class="table table-bordered" style="margin-bottom: 10px">
             <thead>

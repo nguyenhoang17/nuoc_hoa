@@ -11,21 +11,6 @@
                 <div class="col-lg-5">
                     <div class="float-right">
                         <ul class="right_side">
-{{--                            <li>--}}
-{{--                                <a href="cart.html">--}}
-{{--                                    gift card--}}
-{{--                                </a>--}}
-{{--                            </li>--}}
-{{--                            <li>--}}
-{{--                                <a href="tracking.html">--}}
-{{--                                    track order--}}
-{{--                                </a>--}}
-{{--                            </li>--}}
-{{--                            <li>--}}
-{{--                                <a href="contact.html">--}}
-{{--                                    Contact Us--}}
-{{--                                </a>--}}
-{{--                            </li>--}}
                         </ul>
                     </div>
                 </div>
@@ -58,13 +43,7 @@
                                        aria-expanded="false">Cửa hàng</a>
                                     <ul class="dropdown-menu">
                                         <li class="nav-item">
-                                            <a class="nav-link" href="{{route('user.category')}}">Danh mục</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="{{route('user.product.detail')}}">Chi tiết sản phẩm</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="{{route('user.checkout')}}">Thanh toán</a>
+                                            <a class="nav-link" href="{{route('user.category')}}">Tất cả sản phẩm</a>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link" href="{{route('user.cart')}}">Giỏ hàng</a>
@@ -104,26 +83,23 @@
                         <div class="col-lg-5 pr-0">
                             <ul class="nav navbar-nav navbar-right right_nav pull-right">
                                 <li class="nav-item">
-                                    <a href="#" class="icons">
-                                        <i class="ti-search" aria-hidden="true"></i>
+                                    <a href="{{route('user.carts.list')}}" class="icons">
+                                        <i class="ti-shopping-cart"></i><span style="right: 29px;
+                                                                                    width: 13px;
+                                                                                    position: absolute;
+                                                                                    font-size: 10px;
+                                                                                    border-radius: 50%;
+                                                                                    background-color: red;
+                                                                                    color: #fff;
+                                                                                    height: 13px;
+                                                                                    top: 24px;
+                                                                                    line-height: 11px;">{{\Gloudemans\Shoppingcart\Facades\Cart::count()}}</span>
                                     </a>
                                 </li>
 
                                 <li class="nav-item">
-                                    <a href="#" class="icons">
-                                        <i class="ti-shopping-cart"></i>
-                                    </a>
-                                </li>
-
-                                <li class="nav-item">
-                                    <a href="#" class="icons">
+                                    <a href="{{route('user.login')}}" class="icons">
                                         <i class="ti-user" aria-hidden="true"></i>
-                                    </a>
-                                </li>
-
-                                <li class="nav-item">
-                                    <a href="#" class="icons">
-                                        <i class="ti-heart" aria-hidden="true"></i>
                                     </a>
                                 </li>
                             </ul>

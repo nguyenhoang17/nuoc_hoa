@@ -31,26 +31,23 @@
                             <th scope="col">Sản phẩm</th>
                             <th scope="col">Giá</th>
                             <th scope="col">Số lượng</th>
-                            <th scope="col">Thành tiền</th>
+                            <th scope="col" style="width: 100px">Thành tiền</th>
+                            <th></th>
                         </tr>
                         </thead>
                         <tbody>
+                        @if($carts)
+                            @foreach($carts as $cart)
                         <tr>
                             <td>
                                 <div class="media">
-                                    <div class="d-flex">
-                                        <img width="100px"
-                                            src="./user/img/demo.jpg"
-                                            alt=""
-                                        />
-                                    </div>
                                     <div class="media-body">
-                                        <p>Minimalistic shop for multipurpose use</p>
+                                        <p>{{$cart->name}}</p>
                                     </div>
                                 </div>
                             </td>
                             <td>
-                                <h5>1.000.000 vnđ</h5>
+                                <h5>{{number_format($cart->price)}} đ</h5>
                             </td>
                             <td>
                                 <div class="product_count">
@@ -59,81 +56,43 @@
                                         name="qty"
                                         id="sst"
                                         maxlength="12"
-                                        value="1"
+                                        value="{{$cart->qty}}"
                                         title="Quantity:"
                                         class="input-text qty"
+                                        disabled
                                     />
-{{--                                    <button--}}
-{{--                                        onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;"--}}
-{{--                                        class="increase items-count"--}}
-{{--                                        type="button"--}}
-{{--                                    >--}}
-{{--                                        <i class="lnr lnr-chevron-up"></i>--}}
-{{--                                    </button>--}}
-{{--                                    <button--}}
-{{--                                        onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst ) &amp;&amp; sst > 0 ) result.value--;return false;"--}}
-{{--                                        class="reduced items-count"--}}
-{{--                                        type="button"--}}
-{{--                                    >--}}
-{{--                                        <i class="lnr lnr-chevron-down"></i>--}}
-{{--                                    </button>--}}
+                                    <a href="{{route('user.carts.up', ['rowId' => $cart->rowId, 'qty' => $cart->qty, 'id' => $cart->id])}}"><button
+                                            onclick=""
+                                            class="increase items-count"
+                                            type="button"
+                                        >
+                                            <i class="fa-solid fa-chevron-up"></i>
+                                        </button></a>
+                                    <a href="{{route('user.carts.down', ['rowId' => $cart->rowId, 'qty' => $cart->qty])}}">
+                                        <button
+                                            onclick=""
+                                            class="reduced items-count"
+                                            type="button"
+                                        >
+                                            <i class="fa-solid fa-chevron-down"></i>
+                                        </button>
+                                    </a>
                                 </div>
                             </td>
                             <td>
-                                <h5>1.000.000 vnđ</h5>
+                                <h5>{{number_format($cart->subtotal)}} đ</h5>
                             </td>
+                            <td><form action="{{route('user.carts.remove', $cart->rowId)}}" method="POST" style="display: inline-block">
+                                    @csrf
+                                    <input type="hidden" name="_method" value="delete">
+                                    <button id="delete" onclick="deleteBorder()" style="margin-left:10px; border: none" type="submit" class= "btn-delete text-danger"><i class="fa-solid fa-trash"></i></button>
+                                </form></td>
                         </tr>
-                        <tr>
-                            <td>
-                                <div class="media">
-                                    <div class="d-flex">
-                                        <img width="100px"
-                                             src="./user/img/demo.jpg"
-                                             alt=""
-                                        />
-                                    </div>
-                                    <div class="media-body">
-                                        <p>Minimalistic shop for multipurpose use</p>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <h5>1.000.000 vnđ</h5>
-                            </td>
-                            <td>
-                                <div class="product_count">
-                                    <input
-                                        type="text"
-                                        name="qty"
-                                        id="sst"
-                                        maxlength="12"
-                                        value="1"
-                                        title="Quantity:"
-                                        class="input-text qty"
-                                    />
-                                    {{--                                    <button--}}
-                                    {{--                                        onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;"--}}
-                                    {{--                                        class="increase items-count"--}}
-                                    {{--                                        type="button"--}}
-                                    {{--                                    >--}}
-                                    {{--                                        <i class="lnr lnr-chevron-up"></i>--}}
-                                    {{--                                    </button>--}}
-                                    {{--                                    <button--}}
-                                    {{--                                        onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst ) &amp;&amp; sst > 0 ) result.value--;return false;"--}}
-                                    {{--                                        class="reduced items-count"--}}
-                                    {{--                                        type="button"--}}
-                                    {{--                                    >--}}
-                                    {{--                                        <i class="lnr lnr-chevron-down"></i>--}}
-                                    {{--                                    </button>--}}
-                                </div>
-                            </td>
-                            <td>
-                                <h5>1.000.000 vnđ</h5>
-                            </td>
-                        </tr>
+                            @endforeach
+                        @endif
                         <tr class="bottom_button">
                             <td>
-                                <a class="gray_btn" href="#">Cập nhật giỏ hàng</a>
+                                <a class="gray_btn" href="{{route('user.carts.reset')}}">Làm mới giỏ hàng</a>
                             </td>
                             <td></td>
                             <td></td>
@@ -152,7 +111,7 @@
                                 <h5>Thành tiền</h5>
                             </td>
                             <td>
-                                <h5>1.000.000 vnđ</h5>
+                                <h5>{{$cartTotals}}đ</h5>
                             </td>
                         </tr>
 {{--                        <tr class="shipping_area">--}}
@@ -202,8 +161,8 @@
                             <td></td>
                             <td>
                                 <div class="checkout_btn_inner">
-                                    <a class="gray_btn" href="#">Tiếp tục mua sắm</a>
-                                    <a class="main_btn" href="#">Tiến hành thanh toán</a>
+                                    <a class="gray_btn" href="{{route('user.category')}}">Tiếp tục mua sắm</a>
+                                    <a class="main_btn" href="{{route('user.checkout.list')}}">Tiến hành thanh toán</a>
                                 </div>
                             </td>
                         </tr>

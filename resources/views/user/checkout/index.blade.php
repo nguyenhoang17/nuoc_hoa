@@ -88,7 +88,7 @@
 {{--            </div>--}}
             <div class="billing_details">
                 <div class="row">
-                    <div class="col-lg-8">
+                    <div class="col-lg-5">
                         <h3>Hoá đơn chi tiết</h3>
                         <form
                             class="row contact_form"
@@ -96,26 +96,18 @@
                             method="post"
                             novalidate="novalidate"
                         >
-                            <div class="col-md-6 form-group p_star">
+                            <div class="col-md-12 form-group p_star">
+                                <div class="d-flex justify-content-between">
+                                    <label for="email" class="form-label">Tên người nhận<span class="text-danger">*</span></label>
+
+                                </div>
                                 <input
                                     type="text"
                                     class="form-control"
                                     id="first"
-                                    name="name"
+                                    value="{{auth()->guard('web')->user()->name}}"
+                                    name="name" placeholder="Tên khách hàng"
                                 />
-                                <span
-                                    class="placeholder"
-                                    data-placeholder="Họ"
-                                ></span>
-                            </div>
-                            <div class="col-md-6 form-group p_star">
-                                <input
-                                    type="text"
-                                    class="form-control"
-                                    id="last"
-                                    name="name"
-                                />
-                                <span class="placeholder" data-placeholder="Tên"></span>
                             </div>
 {{--                            <div class="col-md-12 form-group">--}}
 {{--                                <input--}}
@@ -127,40 +119,45 @@
 {{--                                />--}}
 {{--                            </div>--}}
                             <div class="col-md-6 form-group p_star">
+                                <div class="d-flex justify-content-between">
+                                    <label for="email" class="form-label">Số điện thoại<span class="text-danger">*</span></label>
+
+                                </div>
                                 <input
                                     type="text"
                                     class="form-control"
                                     id="number"
-                                    name="number"
+                                    name="phone"
+                                    value="{{auth()->guard('web')->user()->phone}}"
+                                    disabled
                                 />
-                                <span
-                                    class="placeholder"
-                                    data-placeholder="Số điện thoại"
-                                ></span>
+
                             </div>
                             <div class="col-md-6 form-group p_star">
+                                <div class="d-flex justify-content-between">
+                                    <label for="email" class="form-label">Email<span class="text-danger">*</span></label>
+                                </div>
                                 <input
                                     type="text"
                                     class="form-control"
                                     id="email"
-                                    name="compemailany"
+                                    name="email"
+                                    value="{{auth()->guard('web')->user()->email}}"
+                                    disabled
                                 />
-                                <span
-                                    class="placeholder"
-                                    data-placeholder="Địa chỉ email"
-                                ></span>
                             </div>
                             <div class="col-md-12 form-group p_star">
+                                <div class="d-flex justify-content-between">
+                                    <label for="email" class="form-label">Địa chỉ<span class="text-danger">*</span></label>
+                                </div>
                                 <input
                                     type="text"
                                     class="form-control"
                                     id="add1"
-                                    name="add1"
+                                    name="address"
+                                    placeholder="Nhập địa chỉ"
+                                    value="@if(auth()->guard('web')->user()->address) {{auth()->guard('web')->user()->address}}@endif"
                                 />
-                                <span
-                                    class="placeholder"
-                                    data-placeholder="Địa chỉ"
-                                ></span>
                             </div>
 {{--                            <div class="col-md-12 form-group p_star">--}}
 {{--                                <input--}}
@@ -200,76 +197,45 @@
 {{--                                />--}}
 {{--                            </div>--}}
                             <div class="col-md-12 form-group">
-                                <div class="creat_account">
-                                    <input type="checkbox" id="f-option2" name="selector" />
-                                    <label for="f-option2">Tạo 1 tài khoản?</label>
-                                </div>
                             </div>
                             <div class="col-md-12 form-group">
-                                <div class="creat_account">
-                                    <h3>Chi tiết vận chuyển</h3>
-                                    <input type="checkbox" id="f-option3" name="selector" />
-                                    <label for="f-option3">Vận chuyển tới 1 địa điểm khác?</label>
-                                </div>
                                 <textarea
                                     class="form-control"
                                     name="message"
                                     id="message"
                                     rows="1"
-                                    placeholder="Order Notes"
+                                    placeholder="Chú ý khi giao hàng"
                                 ></textarea>
                             </div>
                         </form>
                     </div>
-                    <div class="col-lg-4">
+                    <div class="col-lg-7">
                         <div class="order_box">
                             <h2>Đơn hàng của bạn</h2>
                             <ul class="list">
                                 <li>
-                                    <a href="#"
+                                    <a href=""
                                     >Sản phẩm
                                         <span>Tổng</span>
                                     </a>
                                 </li>
+                                @if($carts)
+                                    @foreach($carts as $cart)
                                 <li>
                                     <a href="#"
-                                    >Fresh Blackberry
-                                        <span class="middle">x 02</span>
-                                        <span class="last">$720.00</span>
+                                    >{{$cart->name}}
+                                        <span class="middle">x {{$cart->qty}}</span>
+                                        <span class="last">{{number_format($cart->subtotal)}}đ</span>
                                     </a>
                                 </li>
-                                <li>
-                                    <a href="#"
-                                    >Fresh Tomatoes
-                                        <span class="middle">x 02</span>
-                                        <span class="last">$720.00</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#"
-                                    >Fresh Brocoli
-                                        <span class="middle">x 02</span>
-                                        <span class="last">$720.00</span>
-                                    </a>
-                                </li>
+                                    @endforeach
+                                @endif
                             </ul>
                             <ul class="list list_2">
-{{--                                <li>--}}
-{{--                                    <a href="#"--}}
-{{--                                    >Subtotal--}}
-{{--                                        <span>$2160.00</span>--}}
-{{--                                    </a>--}}
-{{--                                </li>--}}
-{{--                                <li>--}}
-{{--                                    <a href="#"--}}
-{{--                                    >Shipping--}}
-{{--                                        <span>Flat rate: $50.00</span>--}}
-{{--                                    </a>--}}
-{{--                                </li>--}}
                                 <li>
                                     <a href="#"
                                     >Tổng tiền
-                                        <span>$2160.00</span>
+                                        <span>{{Cart::subtotal()}}đ</span>
                                     </a>
                                 </li>
                             </ul>
@@ -296,12 +262,7 @@
 {{--                                    Store State / County, Store Postcode.--}}
 {{--                                </p>--}}
 {{--                            </div>--}}
-                            <div class="creat_account">
-                                <input type="checkbox" id="f-option4" name="selector" />
-                                <label for="f-option4">I’ve read and accept the </label>
-                                <a href="#">terms & conditions*</a>
-                            </div>
-                            <a class="main_btn" href="#">Tiến hành thanh toán</a>
+                            <a class="main_btn" href="{{route('user.orders.store')}}">Tiến hành thanh toán</a>
                         </div>
                     </div>
                 </div>

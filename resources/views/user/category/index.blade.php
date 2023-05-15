@@ -41,354 +41,107 @@
 
                     <div class="latest_product_inner">
                         <div class="row">
+                            @if($products)
+                                @foreach($products as $product)
                             <div class="col-lg-4 col-md-6">
                                 <div class="single-product">
                                     <div class="product-img">
                                         <img
                                             class="card-img"
-                                            src="./user/img/demo.jpg"
+                                            src="{{url(Storage::url($product->image))}}"
                                             alt=""
                                         />
                                         <div class="p_icon">
-                                            <a href="#">
+                                            <a href="{{route('user.product.detail', $product->id)}}">
                                                 <i class="ti-eye"></i>
                                             </a>
-                                            <a href="#">
-                                                <i class="ti-heart"></i>
-                                            </a>
-                                            <a href="#">
+                                            <a href="{{route('user.carts.add', $product->id)}}">
                                                 <i class="ti-shopping-cart"></i>
                                             </a>
                                         </div>
                                     </div>
                                     <div class="product-btm">
                                         <a href="#" class="d-block">
-                                            <h4>X-Men</h4>
+                                            <h4>{{$product->name}}</h4>
                                         </a>
                                         <div class="mt-3">
-                                            <span class="mr-4">1.000.000 vnđ</span>
-                                            <del>1.200.000 vnđ</del>
+                                            <span class="mr-4">{{number_format($product->sale_price)}}đ</span>
+                                            @if($product->sale_price < $product->output_price)
+                                                <del>{{number_format($product->output_price)}}đ</del>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
-                            <div class="col-lg-4 col-md-6">
-                                <div class="single-product">
-                                    <div class="product-img">
-                                        <img
-                                            class="card-img"
-                                            src="./user/img/demo.jpg"
-                                            alt=""
-                                        />
-                                        <div class="p_icon">
-                                            <a href="#">
-                                                <i class="ti-eye"></i>
-                                            </a>
-                                            <a href="#">
-                                                <i class="ti-heart"></i>
-                                            </a>
-                                            <a href="#">
-                                                <i class="ti-shopping-cart"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="product-btm">
-                                        <a href="#" class="d-block">
-                                            <h4>X-Men</h4>
-                                        </a>
-                                        <div class="mt-3">
-                                            <span class="mr-4">1.000.000 vnđ</span>
-                                            <del>1.200.000 vnđ</del>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-4 col-md-6">
-                                <div class="single-product">
-                                    <div class="product-img">
-                                        <img
-                                            class="card-img"
-                                            src="./user/img/demo.jpg"
-                                            alt=""
-                                        />
-                                        <div class="p_icon">
-                                            <a href="#">
-                                                <i class="ti-eye"></i>
-                                            </a>
-                                            <a href="#">
-                                                <i class="ti-heart"></i>
-                                            </a>
-                                            <a href="#">
-                                                <i class="ti-shopping-cart"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="product-btm">
-                                        <a href="#" class="d-block">
-                                            <h4>X-Men</h4>
-                                        </a>
-                                        <div class="mt-3">
-                                            <span class="mr-4">1.000.000 vnđ</span>
-                                            <del>1.200.000 vnđ</del>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-4 col-md-6">
-                                <div class="single-product">
-                                    <div class="product-img">
-                                        <img
-                                            class="card-img"
-                                            src="./user/img/demo.jpg"
-                                            alt=""
-                                        />
-                                        <div class="p_icon">
-                                            <a href="#">
-                                                <i class="ti-eye"></i>
-                                            </a>
-                                            <a href="#">
-                                                <i class="ti-heart"></i>
-                                            </a>
-                                            <a href="#">
-                                                <i class="ti-shopping-cart"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="product-btm">
-                                        <a href="#" class="d-block">
-                                            <h4>X-Men</h4>
-                                        </a>
-                                        <div class="mt-3">
-                                            <span class="mr-4">1.000.000 vnđ</span>
-                                            <del>1.200.000 vnđ</del>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-4 col-md-6">
-                                <div class="single-product">
-                                    <div class="product-img">
-                                        <img
-                                            class="card-img"
-                                            src="./user/img/demo.jpg"
-                                            alt=""
-                                        />
-                                        <div class="p_icon">
-                                            <a href="#">
-                                                <i class="ti-eye"></i>
-                                            </a>
-                                            <a href="#">
-                                                <i class="ti-heart"></i>
-                                            </a>
-                                            <a href="#">
-                                                <i class="ti-shopping-cart"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="product-btm">
-                                        <a href="#" class="d-block">
-                                            <h4>X-Men</h4>
-                                        </a>
-                                        <div class="mt-3">
-                                            <span class="mr-4">1.000.000 vnđ</span>
-                                            <del>1.200.000 vnđ</del>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-4 col-md-6">
-                                <div class="single-product">
-                                    <div class="product-img">
-                                        <img
-                                            class="card-img"
-                                            src="./user/img/demo.jpg"
-                                            alt=""
-                                        />
-                                        <div class="p_icon">
-                                            <a href="#">
-                                                <i class="ti-eye"></i>
-                                            </a>
-                                            <a href="#">
-                                                <i class="ti-heart"></i>
-                                            </a>
-                                            <a href="#">
-                                                <i class="ti-shopping-cart"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="product-btm">
-                                        <a href="#" class="d-block">
-                                            <h4>X-Men</h4>
-                                        </a>
-                                        <div class="mt-3">
-                                            <span class="mr-4">1.000.000 vnđ</span>
-                                            <del>1.200.000 vnđ</del>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-4 col-md-6">
-                                <div class="single-product">
-                                    <div class="product-img">
-                                        <img
-                                            class="card-img"
-                                            src="./user/img/demo.jpg"
-                                            alt=""
-                                        />
-                                        <div class="p_icon">
-                                            <a href="#">
-                                                <i class="ti-eye"></i>
-                                            </a>
-                                            <a href="#">
-                                                <i class="ti-heart"></i>
-                                            </a>
-                                            <a href="#">
-                                                <i class="ti-shopping-cart"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="product-btm">
-                                        <a href="#" class="d-block">
-                                            <h4>X-Men</h4>
-                                        </a>
-                                        <div class="mt-3">
-                                            <span class="mr-4">1.000.000 vnđ</span>
-                                            <del>1.200.000 vnđ</del>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-4 col-md-6">
-                                <div class="single-product">
-                                    <div class="product-img">
-                                        <img
-                                            class="card-img"
-                                            src="./user/img/demo.jpg"
-                                            alt=""
-                                        />
-                                        <div class="p_icon">
-                                            <a href="#">
-                                                <i class="ti-eye"></i>
-                                            </a>
-                                            <a href="#">
-                                                <i class="ti-heart"></i>
-                                            </a>
-                                            <a href="#">
-                                                <i class="ti-shopping-cart"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="product-btm">
-                                        <a href="#" class="d-block">
-                                            <h4>X-Men</h4>
-                                        </a>
-                                        <div class="mt-3">
-                                            <span class="mr-4">1.000.000 vnđ</span>
-                                            <del>1.200.000 vnđ</del>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-4 col-md-6">
-                                <div class="single-product">
-                                    <div class="product-img">
-                                        <img
-                                            class="card-img"
-                                            src="./user/img/demo.jpg"
-                                            alt=""
-                                        />
-                                        <div class="p_icon">
-                                            <a href="#">
-                                                <i class="ti-eye"></i>
-                                            </a>
-                                            <a href="#">
-                                                <i class="ti-heart"></i>
-                                            </a>
-                                            <a href="#">
-                                                <i class="ti-shopping-cart"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="product-btm">
-                                        <a href="#" class="d-block">
-                                            <h4>X-Men</h4>
-                                        </a>
-                                        <div class="mt-3">
-                                            <span class="mr-4">1.000.000 vnđ</span>
-                                            <del>1.200.000 vnđ</del>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                                @endforeach
+                            @endif
                         </div>
                     </div>
                 </div>
 
                 <div class="col-lg-3">
                     <div class="left_sidebar_area">
-                        <aside class="left_widgets p_filter_widgets">
-                            <div class="l_w_title">
-                                <h3>Danh mục</h3>
-                            </div>
-                            <div class="widgets_inner">
-                                <ul class="list">
-                                    <li>
-                                        <a href="#">Frozen Fish</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Dried Fish</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Fresh Fish</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Meat Alternatives</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Fresh Fish</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Meat Alternatives</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Meat</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </aside>
+                        <form action="{{route('user.category')}}" method="GET">
+                            <aside class="left_widgets p_filter_widgets">
+                                <div class="l_w_title">
+                                    <h3>Danh mục</h3>
+                                </div>
+                                <div class="widgets_inner">
+                                    <ul class="list" style="list-style: none">
+                                        <style>
+                                            .p_filter_widgets .list li a:before {
+                                                display: none;
+                                            }
+                                            .p_filter_widgets .list li a {
+                                                padding-left: 10px !important;
+                                            }
+                                        </style>
+                                        @if($categories)
+                                            @foreach($categories as $category)
+                                                <li>
+                                                    <input type="radio" id="html" name="category" value="{{$category->id}}"><a href="#">{{$category->name}}</a>
+                                                </li>
+                                            @endforeach
+                                        @endif
+                                    </ul>
+                                </div>
+                            </aside>
 
-                        <aside class="left_widgets p_filter_widgets">
-                            <div class="l_w_title">
-                                <h3>Nhãn hiệu</h3>
-                            </div>
-                            <div class="widgets_inner">
-                                <ul class="list">
-                                    <li>
-                                        <a href="#">Apple</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Asus</a>
-                                    </li>
-                                    <li class="active">
-                                        <a href="#">Gionee</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Micromax</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Samsung</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </aside>
+                            <aside class="left_widgets p_filter_widgets">
+                                <div class="l_w_title">
+                                    <h3>Nhãn hiệu</h3>
+                                </div>
+                                <div class="widgets_inner">
+                                    <ul class="list">
+                                        @if($brands)
+                                            @foreach($brands as $brand)
+                                                <li>
+                                                    <input type="radio" id="html" name="brand" value="{{$brand->id}}"><a href="#">{{$brand->name}}</a>
+                                                </li>
+                                            @endforeach
+                                        @endif
+                                    </ul>
+                                </div>
+                            </aside>
+
+                            <aside class="left_widgets p_filter_widgets">
+                                <div class="l_w_title">
+                                    <h3>Giá sản phẩm</h3>
+                                </div>
+                                <div class="widgets_inner">
+                                    <select style="border: 1px solid #ccc" name="price" id="cars">
+                                        <option value="" selected disabled>--Chọn giá--</option>
+                                        <option value="{{\App\Models\Product::KHOANG_GIA['100-500']}}">100.000đ - 500.000đ</option>
+                                        <option value="{{\App\Models\Product::KHOANG_GIA['500-1tr']}}">500.000đ - 1.000.000đ</option>
+                                        <option value="{{\App\Models\Product::KHOANG_GIA['1tr-3tr']}}">1.000.000đ - 3.000.000đ</option>
+                                        <option value="{{\App\Models\Product::KHOANG_GIA['3tr-5tr']}}">3.000.000đ - 5.000.000đ</option>
+                                        <option value="{{\App\Models\Product::KHOANG_GIA['tren_5tr']}}">Trên 5.000.000đ</option>
+                                    </select>
+                                </div>
+                            </aside>
+                            <button class="btn btn-success" type="submit">Áp dụng</button>
+                        </form>
+
 
 {{--                        <aside class="left_widgets p_filter_widgets">--}}
 {{--                            <div class="l_w_title">--}}

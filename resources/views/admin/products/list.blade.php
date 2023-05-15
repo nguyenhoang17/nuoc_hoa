@@ -19,6 +19,41 @@
         </div><!-- /.container-fluid -->
     </div>
     <div class="card-body">
+        <form>
+            <div class="input-group input-group-sm" style="width: 70%; margin-bottom: 10px;">
+                <input type="text" value="" name="name" class="form-control float-right mx-1" placeholder="Nhập tên để tìm kiếm">
+                <select name="category" style="border: 1px solid #ccc" id="" class="mr-1">
+                    <option value="" disabled selected>__Chọn danh mục__</option>
+                    @if($categories)
+                        @foreach($categories as $category)
+                    <option value="{{$category->id}}">{{$category->name}}</option>
+                        @endforeach
+                    @endif
+                </select>
+                <select name="brand" style="border: 1px solid #ccc" id="" class="mr-1">
+                    <option value="" disabled selected>__Chọn nhãn hiệu__</option>
+                    @if($brands)
+                        @foreach($brands as $brand)
+                            <option value="{{$brand->id}}">{{$brand->name}}</option>
+                        @endforeach
+                    @endif
+                </select>
+                <select style="border: 1px solid #ccc" name="price" id="">
+                    <option value="" selected disabled>--Chọn giá bán--</option>
+                    <option value="{{\App\Models\Product::KHOANG_GIA['100-500']}}">100.000đ - 500.000đ</option>
+                    <option value="{{\App\Models\Product::KHOANG_GIA['500-1tr']}}">500.000đ - 1.000.000đ</option>
+                    <option value="{{\App\Models\Product::KHOANG_GIA['1tr-3tr']}}">1.000.000đ - 3.000.000đ</option>
+                    <option value="{{\App\Models\Product::KHOANG_GIA['3tr-5tr']}}">3.000.000đ - 5.000.000đ</option>
+                    <option value="{{\App\Models\Product::KHOANG_GIA['tren_5tr']}}">Trên 5.000.000đ</option>
+                </select>
+                <button type="submit" class="btn btn-primary" style="height:32.5px; margin-left:5px;padding-top:3px;">
+                    Lọc kết quả
+                </button>
+            </div>
+        </form>
+        <a href="{{route('admin.products.list')}}" class="btn btn-primary" style="height:32.5px; margin-left:5px;padding-top:3px; color:#fff">
+            Huỷ lọc
+        </a>
         <a href="{{route('admin.products.create')}}" class="btn-primary px-2 py-2 mb-3 border-0 float-right text-white " style="cursor: pointer">Thêm mới</a>
         <table class="table text-nowrap">
             <thead>
@@ -41,7 +76,7 @@
                 @foreach($products as $key => $product)
                 <tr>
                     <td>{{$key}}</td>
-                    <td style= "color: blue"><a href ="">{{$product->name}}</a></td>
+                    <td style= "color: blue"><a href ="{{route('user.product.detail', $product->id)}}" target="_blank">{{$product->name}}</a></td>
                     <td>
                         <img style="width: 100px;
                             object-fit: cover;

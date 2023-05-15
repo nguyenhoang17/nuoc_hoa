@@ -12,6 +12,14 @@ class Product extends Model
     const STILL_IN_BUSINESS = 1;
     const STOP_BUSINESS = 2;
 
+    const KHOANG_GIA = [
+      '100-500' => 1,
+      '500-1tr' => 2,
+      '1tr-3tr' => 3,
+      '3tr-5tr' => 4,
+      'tren_5tr' => 5
+    ];
+
     protected $table = "products";
     protected $fillable = [
         'name',

@@ -8,8 +8,15 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-    public function index(){
-        $users = User::paginate(15);
+    public function index(Request $request){
+        $query = User::query();
+        if($request->input('email')) {
+            $query->where('email', 'like', '%' . $request->input('email') . '%');
+        }
+        if($request->input('status')) {
+            $query->where('status',$request->input('status'));
+        }
+        $users = $query->paginate(10);
         return view('admin.users.list',['users'=>$users]);
     }
 

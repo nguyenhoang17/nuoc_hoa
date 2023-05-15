@@ -21,6 +21,7 @@ class Kernel extends HttpKernel
         \Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
         \App\Http\Middleware\TrimStrings::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
+
     ];
 
     /**
@@ -66,5 +67,7 @@ class Kernel extends HttpKernel
         'admin' => \App\Http\Middleware\AdminGuard::class,
         'block.admin.login' => \App\Http\Middleware\BlockLoginAdmin::class,
         'preventBackHistory' => \App\Http\Middleware\PreventBackHistory::class,
+        'web' => \App\Http\Middleware\UserGuard::class,
+
     ];
 }

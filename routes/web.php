@@ -10,6 +10,8 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\User\CartController;
 use App\Http\Controllers\User\CheckoutController;
 use App\Http\Controllers\User\HomeController;
+use App\Http\Controllers\User\OrderController;
+use App\Http\Controllers\User\UserController as MyAccount;
 use App\Http\Controllers\User\ProductCategoryController;
 use App\Http\Controllers\User\ProductController;
 use Illuminate\Support\Facades\Route;
@@ -35,7 +37,12 @@ Route::get('/admin/logout', [LogoutController::class,'logoutAdmin'])->name('admi
 
 //User auth
 Route::get('/login', function () {
-    return view('user.auth.login');
+    if(!auth()->guard('web')->check()){
+        return view('user.auth.login');
+    } else {
+        return back();
+    }
+
 })->name('user.login');
 Route::get('/register', function () {
     return view('user.auth.register');
@@ -98,10 +105,32 @@ Route::group([
 ],function(){
     Route::get('/',[HomeController::class,'index'])->name('user.home');
     Route::get('/product-category',[ProductCategoryController::class,'index'])->name('user.category');
-    Route::get('/product-detail',[ProductController::class,'detail'])->name('user.product.detail');
+    Route::get('/product-detail/{id}',[ProductController::class,'detail'])->name('user.product.detail');
     Route::get('/checkout',[CheckoutController::class,'index'])->name('user.checkout');
     Route::get('/card',[CartController::class,'index'])->name('user.cart');
     Route::get('/contact',function () {
         return view('user.contact.contact');
     })->name('user.contact');
+
+    //cart
+    Route::prefix('carts')->name('user.carts.')->group(function (){
+        Route::get('/', [CartController::class, 'index'])->name('list');
+        Route::get('add-cart/{id}', [CartController::class, 'addCart'])->name('add');
+        Route::get('update-cart', [CartController::class, 'reset'])->name('reset');
+        Route::delete('remove/{rowId}', [CartController::class, 'remove'])->name('remove');
+        Route::get('/carts-down/{rowId}/{qty}',[CartController::class, 'down'])->name('down');
+        Route::get('/carts-up/{rowId}/{qty}/{id}',[CartController::class, 'up'])->name('up');
+    });
+
+    //checkout
+    Route::prefix('checkout')->name('user.checkout.')->group(function (){
+        Route::get('/', [CheckoutController::class, 'index'])->name('list');
+    });
+
+    //order
+    Route::prefix('orders')->name('user.orders.')->group(function (){
+        Route::post('/',[OrderController::class, 'store'])->name('store');
+    });
+
+
 });
