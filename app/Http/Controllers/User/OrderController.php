@@ -38,7 +38,6 @@ class OrderController extends Controller
                 $data[0]->sell_count = $data[0]->sell_count + $item->qty ;
                 $data[0]->quantity = $data[0]->quantity - $item->qty ;
                 $data[0]->save();
-
                 $order->products()->attach($item->id,
                     ['quantity'=>$item->qty ,
                         'price'=>$item->price]
@@ -58,9 +57,6 @@ class OrderController extends Controller
             $request->session()->flash('error','Tạo đơn hàng không thành công');
             return back();
         }
-
-
-
     }
 
     private function ascendingCode()

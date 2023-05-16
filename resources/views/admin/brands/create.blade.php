@@ -20,7 +20,7 @@
                 <div class="col-8 card-body">
                     <div class="form-group">
                         <label for="exampleInputEmail1">Tên nhãn hiệu</label>
-                        <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Tên danh mục" name="name" value="{{old('name')}}">
+                        <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Tên nhãn hiệu" name="name" value="{{old('name')}}">
                         @error('name')
                         <span class="error">{{ $message }}</span>
                         @enderror

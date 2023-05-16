@@ -23,7 +23,7 @@
                 <div class="col-8 card-body">
                     <div class="form-group">
                         <label for="exampleInputEmail1">Tên danh mục</label>
-                        <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Tên danh mục" name="name" value="@if(!empty(old("name"))){{old("name")}}@else {{$brand->name}}@endif">
+                        <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Tên nhãn hiệu" name="name" value="@if(!empty(old("name"))){{old("name")}}@else {{$brand->name}}@endif">
                         @error('name')
                         <span class="error">{{ $message }}</span>
                         @enderror

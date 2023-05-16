@@ -43,12 +43,12 @@ Route::get('/login', function () {
     } else {
         return back();
     }
-
 })->name('user.login');
 Route::get('/register', function () {
     return view('user.auth.register');
 })->name('user.register');
 Route::post('/login/authenticate', [LoginController::class,'loginUser'])->name('user.login.authenticate');
+Route::get('/logout', [LogoutController::class,'logoutUser'])->name('user.logout');
 Route::post('/register/authenticate', [RegisterController::class,'registerUser'])->name('user.register.authenticate');
 
 

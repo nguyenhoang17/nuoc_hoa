@@ -145,11 +145,11 @@
             </div>
 
             <div class="row">
-                <div class="col-lg-6 mt-5 mt-lg-0">
+                <div class="col-lg-12 mt-5 mt-lg-0">
                         <div class="row">
                             @if($lastProducts)
                                 @foreach($lastProducts as $lastProduct)
-                                    <div class="col-lg-6 col-md-6">
+                                    <div class="col-lg-3 col-md-3">
                                         <div class="single-product">
                                             <div class="product-img">
                                                 <img class="img-fluid w-100" src="{{url(Storage::url($lastProduct->image))}}" alt="" />
@@ -200,11 +200,11 @@
             </div>
 
             <div class="row">
-                <div class="col-lg-6 mt-5 mt-lg-0">
+                <div class="col-lg-12 mt-5 mt-lg-0">
                     <div class="row">
                         @if($InspirationalProducts)
                             @foreach($InspirationalProducts as $InspirationalProduct)
-                                <div class="col-lg-6 col-md-6">
+                                <div class="col-lg-3 col-md-3">
                                     <div class="single-product">
                                         <div class="product-img">
                                             <img class="img-fluid w-100" src="{{url(Storage::url($InspirationalProduct->image))}}" alt="" />

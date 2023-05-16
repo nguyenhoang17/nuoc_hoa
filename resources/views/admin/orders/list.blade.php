@@ -22,13 +22,16 @@
         <form>
             <div class="input-group input-group-sm" style="width: 30%; margin-bottom: 10px;">
                 <select style="border: 1px solid #ccc" name="status" id="">
-                    <option value="" selected disabled>--Chọn trạng thái--</option>
-                    <option value="{{\App\Models\Order::STATUS['DA_DAT_HANG']}}">Đã đặt hàng</option>
-                    <option value="{{\App\Models\Order::STATUS['DA_XAC_NHAN']}}">Đã xác nhận</option>
-                    <option value="{{\App\Models\Order::STATUS['DANG_VAN_CHUYEN']}}">Đang vận chuyển</option>
-                    <option value="{{\App\Models\Order::STATUS['DA_GIAO_HANG']}}">Đã giao hàng</option>
-                    <option value="{{\App\Models\Order::STATUS['YEU_CAU_HUY']}}">Yêu cầu huỷ</option>
-                    <option value="{{\App\Models\Order::STATUS['DA_BI_HUY']}}">Đã huỷ</option>
+                    @php
+                        $selected="";
+                    @endphp
+                    <option value="" @php if(!request()->get('status')) {$selected = "selected";}@endphp {{$selected}} disabled>__Chọn trạng thái__</option>
+                    <option value="{{\App\Models\Order::STATUS['DA_DAT_HANG']}}" @php if(\App\Models\Order::STATUS['DA_DAT_HANG'] === (int)request()->get('status')) {$selected = "selected";}else{$selected = '';}@endphp {{$selected}}>Đã đặt hàng</option>
+                    <option value="{{\App\Models\Order::STATUS['DA_XAC_NHAN']}}" @php if(\App\Models\Order::STATUS['DA_XAC_NHAN'] === (int)request()->get('status')) {$selected = "selected";}else{$selected = '';}@endphp {{$selected}}>Đã xác nhận</option>
+                    <option value="{{\App\Models\Order::STATUS['DANG_VAN_CHUYEN']}}" @php if(\App\Models\Order::STATUS['DANG_VAN_CHUYEN'] === (int)request()->get('status')) {$selected = "selected";}else{$selected = '';}@endphp {{$selected}}>Đang vận chuyển</option>
+                    <option value="{{\App\Models\Order::STATUS['DA_GIAO_HANG']}}" @php if(\App\Models\Order::STATUS['DA_GIAO_HANG'] === (int)request()->get('status')) {$selected = "selected";}else{$selected = '';}@endphp {{$selected}}>Đã giao hàng</option>
+                    <option value="{{\App\Models\Order::STATUS['YEU_CAU_HUY']}}" @php if(\App\Models\Order::STATUS['YEU_CAU_HUY'] === (int)request()->get('status')) {$selected = "selected";}else{$selected = '';}@endphp {{$selected}}>Yêu cầu huỷ</option>
+                    <option value="{{\App\Models\Order::STATUS['DA_BI_HUY']}}" @php if(\App\Models\Order::STATUS['DA_BI_HUY'] === (int)request()->get('status')) {$selected = "selected";}else{$selected = '';}@endphp {{$selected}}>Đã huỷ</option>
                 </select>
                 <button type="submit" class="btn btn-primary" style="height:32.5px; margin-left:5px;padding-top:3px;">
                     Lọc kết quả
@@ -57,6 +60,7 @@
             </tr>
             </thead>
             <tbody>
+            @if($orders)
             @foreach($orders as $key => $order)
                 <tr>
                     <td>@php echo $key + 1 @endphp</td>
@@ -111,6 +115,7 @@
                     </td>
                 </tr>
             @endforeach
+            @endif
 
             </tbody>
         </table>

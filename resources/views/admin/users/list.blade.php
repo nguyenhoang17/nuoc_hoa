@@ -21,11 +21,14 @@
     <div class="card-body">
         <form>
             <div class="input-group input-group-sm" style="width: 40%; margin-bottom: 10px;">
-                <input type="text" value="" name="email" class="form-control float-right mx-1" placeholder="Nhập email để tìm kiếm">
+                @php
+                        $selected = '';
+                 @endphp
+                <input type="text" value="{{request()->get('email')}}" name="email" class="form-control float-right mx-1" placeholder="Nhập email để tìm kiếm">
                 <select name="status" style="border: 1px solid #ccc" id="">
-                    <option value="" disabled selected>__Chọn trạng thái__</option>
-                    <option value="{{\App\Models\User::STATUS['ACTIVE']}}">Đang hoạt động</option>
-                    <option value="{{\App\Models\User::STATUS['DE_ACTIVE']}}">Đã bị khoá</option>
+                    <option value="" disabled @php if(!request()->get('status')) {$selected = "selected";}@endphp {{$selected}}>__Chọn trạng thái__</option>
+                    <option value="{{\App\Models\User::STATUS['ACTIVE']}}"  @php if(\App\Models\User::STATUS['ACTIVE'] === (int)request()->get('status')) {$selected = "selected";}else{$selected = '';}@endphp {{$selected}}>Đang hoạt động</option>
+                    <option value="{{\App\Models\User::STATUS['DE_ACTIVE']}}" @php if(\App\Models\User::STATUS['DE_ACTIVE'] === (int)request()->get('status')) {$selected = "selected";}else{$selected = '';}@endphp {{$selected}}>Đã bị khoá</option>
                 </select>
                 <button type="submit" class="btn btn-primary" style="height:32.5px; margin-left:5px;padding-top:3px;">
                     Lọc kết quả
@@ -87,7 +90,7 @@
                     </tr>
                 @endforeach
             @else
-                <div class="text-danger">Chưa có nhãn hiệu nào để hiển thị, vui lòng thêm nhãn hiệu!!!</div>
+                <div class="text-danger">Chưa có khách hàng nào để hiển thị!!!</div>
             @endif
             </tbody>
         </table>

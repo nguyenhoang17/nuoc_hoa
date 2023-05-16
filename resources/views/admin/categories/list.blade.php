@@ -21,7 +21,7 @@
     <div class="card-body">
         <form>
             <div class="input-group input-group-sm" style="width: 30%; margin-bottom: 10px;">
-                <input type="text" value="" name="q" class="form-control float-right mx-1" placeholder="Nhập tên để tìm kiếm">
+                <input type="text" value="{{request()->get('q')}}" name="q" class="form-control float-right mx-1" placeholder="Nhập tên để tìm kiếm">
                 <button type="submit" class="btn btn-primary" style="height:32.5px; margin-left:5px;padding-top:3px;">
                     Lọc kết quả
                 </button>

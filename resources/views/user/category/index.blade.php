@@ -98,8 +98,14 @@
                                         </style>
                                         @if($categories)
                                             @foreach($categories as $category)
+                                                @php
+                                                    $checked="";
+                                                    if($category->id == (int)request()->get('category')){
+                                                      $checked = "checked";
+                                                    }
+                                                @endphp
                                                 <li>
-                                                    <input type="radio" id="html" name="category" value="{{$category->id}}"><a href="#">{{$category->name}}</a>
+                                                    <input type="radio" id="html" name="category" value="{{$category->id}}" {{$checked}}><a href="#">{{$category->name}}</a>
                                                 </li>
                                             @endforeach
                                         @endif
@@ -115,8 +121,14 @@
                                     <ul class="list">
                                         @if($brands)
                                             @foreach($brands as $brand)
+                                                @php
+                                                    $checked="";
+                                                    if($brand->id == (int)request()->get('brand')){
+                                                      $checked = "checked";
+                                                    }
+                                                @endphp
                                                 <li>
-                                                    <input type="radio" id="html" name="brand" value="{{$brand->id}}"><a href="#">{{$brand->name}}</a>
+                                                    <input type="radio" id="html" name="brand" value="{{$brand->id}}" {{$checked}}><a href="#">{{$brand->name}}</a>
                                                 </li>
                                             @endforeach
                                         @endif
@@ -130,16 +142,20 @@
                                 </div>
                                 <div class="widgets_inner">
                                     <select style="border: 1px solid #ccc" name="price" id="cars">
-                                        <option value="" selected disabled>--Chọn giá--</option>
-                                        <option value="{{\App\Models\Product::KHOANG_GIA['100-500']}}">100.000đ - 500.000đ</option>
-                                        <option value="{{\App\Models\Product::KHOANG_GIA['500-1tr']}}">500.000đ - 1.000.000đ</option>
-                                        <option value="{{\App\Models\Product::KHOANG_GIA['1tr-3tr']}}">1.000.000đ - 3.000.000đ</option>
-                                        <option value="{{\App\Models\Product::KHOANG_GIA['3tr-5tr']}}">3.000.000đ - 5.000.000đ</option>
-                                        <option value="{{\App\Models\Product::KHOANG_GIA['tren_5tr']}}">Trên 5.000.000đ</option>
+                                        @php
+                                            $selected="";
+                                        @endphp
+                                        <option value="" @php if(!request()->get('price')) {$selected = "selected";}@endphp {{$selected}} disabled>__Chọn giá bán__</option>
+                                        <option value="{{\App\Models\Product::KHOANG_GIA['100-500']}}" @php if(\App\Models\Product::KHOANG_GIA['100-500'] === (int)request()->get('price')) {$selected = "selected";}else{$selected = '';}@endphp {{$selected}}>100.000đ - 500.000đ</option>
+                                        <option value="{{\App\Models\Product::KHOANG_GIA['500-1tr']}}" @php if(\App\Models\Product::KHOANG_GIA['500-1tr'] === (int)request()->get('price')) {$selected = "selected";}else{$selected = '';}@endphp {{$selected}}>500.000đ - 1.000.000đ</option>
+                                        <option value="{{\App\Models\Product::KHOANG_GIA['1tr-3tr']}}" @php if(\App\Models\Product::KHOANG_GIA['1tr-3tr'] === (int)request()->get('price')) {$selected = "selected";}else{$selected = '';}@endphp {{$selected}}>1.000.000đ - 3.000.000đ</option>
+                                        <option value="{{\App\Models\Product::KHOANG_GIA['3tr-5tr']}}" @php if(\App\Models\Product::KHOANG_GIA['3tr-5tr'] === (int)request()->get('price')) {$selected = "selected";}else{$selected = '';}@endphp {{$selected}}>3.000.000đ - 5.000.000đ</option>
+                                        <option value="{{\App\Models\Product::KHOANG_GIA['tren_5tr']}}" @php if(\App\Models\Product::KHOANG_GIA['tren_5tr'] === (int)request()->get('price')) {$selected = "selected";}else{$selected = '';}@endphp {{$selected}}>Trên 5.000.000đ</option>
                                     </select>
                                 </div>
                             </aside>
                             <button class="btn btn-success" type="submit">Áp dụng</button>
+                            <a href="{{route('user.category')}}" class="btn btn-primary ml-2">Huỷ lọc</a>
                         </form>
 
 

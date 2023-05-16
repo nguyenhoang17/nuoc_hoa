@@ -50,9 +50,11 @@
                                         </li>
                                     </ul>
                                 </li>
+                                @if(auth()->guard('web')->check())
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{route('user.orders.list', auth()->guard('web')->user()->id)}}">Đơn hàng</a>
                                 </li>
+                                @endif
 {{--                                <li class="nav-item submenu dropdown">--}}
 {{--                                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"--}}
 {{--                                       aria-expanded="false">Blog</a>--}}
@@ -105,6 +107,13 @@
                                         <i class="ti-user" aria-hidden="true"></i>
                                     </a>
                                 </li>
+                                @if(auth()->guard('web')->check())
+                                <li class="nav-item">
+                                    <a href="{{route('user.logout')}}" class="icons">
+                                        <i class="fa-solid fa-right-from-bracket"></i>
+                                    </a>
+                                </li>
+                                @endif
                             </ul>
                         </div>
                     </div>

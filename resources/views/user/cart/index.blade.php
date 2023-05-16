@@ -59,7 +59,6 @@
                                         value="{{$cart->qty}}"
                                         title="Quantity:"
                                         class="input-text qty"
-                                        disabled
                                     />
                                     <a href="{{route('user.carts.up', ['rowId' => $cart->rowId, 'qty' => $cart->qty, 'id' => $cart->id])}}"><button
                                             onclick=""
