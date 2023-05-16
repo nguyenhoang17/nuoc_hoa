@@ -87,6 +87,7 @@
 
                         <div class="col-lg-5 pr-0">
                             <ul class="nav navbar-nav navbar-right right_nav pull-right">
+                                @if(!auth()->guard('web')->check())
                                 <li class="nav-item">
                                     <a href="{{route('user.carts.list')}}" class="icons">
                                         <i class="ti-shopping-cart"></i><span style="right: 29px;
@@ -101,7 +102,22 @@
                                                                                     line-height: 11px;">{{\Gloudemans\Shoppingcart\Facades\Cart::count()}}</span>
                                     </a>
                                 </li>
-
+                                @else
+                                    <li class="nav-item">
+                                        <a href="{{route('user.carts.list')}}" class="icons">
+                                            <i class="ti-shopping-cart"></i><span style="right: 65px;
+                                                                                    width: 13px;
+                                                                                    position: absolute;
+                                                                                    font-size: 10px;
+                                                                                    border-radius: 50%;
+                                                                                    background-color: red;
+                                                                                    color: #fff;
+                                                                                    height: 13px;
+                                                                                    top: 24px;
+                                                                                    line-height: 11px;">{{\Gloudemans\Shoppingcart\Facades\Cart::count()}}</span>
+                                        </a>
+                                    </li>
+                                @endif
                                 <li class="nav-item">
                                     <a href="{{route('user.login')}}" class="icons">
                                         <i class="ti-user" aria-hidden="true"></i>

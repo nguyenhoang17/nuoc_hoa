@@ -25,7 +25,7 @@
         <img src="https://collagenbeauty.vn/uploads/fckfinder/pdung/images/nuoc-hoa-cao-cap/nuoc-hoa-ainn/nuoc-hoa-ainn-xanh.jpg" alt="">
     </div>
     <div class="text-center mt-4 name text-success">
-        Trung Kiên
+        Hữu Kiên
     </div>
     <form action="{{ route('user.register.authenticate') }}" method="POST">
         @csrf

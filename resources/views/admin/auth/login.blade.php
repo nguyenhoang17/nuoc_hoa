@@ -1,7 +1,7 @@
 @extends('admin.auth.auth_layouts')
 @section('content')
     <div class="card-body login-card-body">
-        <h2 class="text-success text-center">Nước hoa Trung Kiên</h2>
+        <h2 class="text-success text-center">Nước hoa Hữu Kiên</h2>
         <p class="login-box-msg">Đăng nhập để bắt đầu làm việc</p>
 
         <form action="{{route('admin.login.authenticate')}}" method="post">
