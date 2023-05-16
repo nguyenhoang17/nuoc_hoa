@@ -37,12 +37,10 @@ class OrderController extends Controller
         $order->save();
         $date= $order->created_at->format('Y-m-d');
         $data_static = Statistical::where('order_date',$date)->get();
-
-
         if(count($data_static) > 0){
             $data_static[0]->sales+=$order->total;
             foreach($order->products as $product){
-                $data_static[0]->profit+= ($product->pivot->price * $product->pivot->quantity)-($product->price_input*$product->pivot->quantity);
+                $data_static[0]->profit+= ($product->pivot->price * $product->pivot->quantity)-($product->input_price*$product->pivot->quantity);
                 $data_static[0]->quantity+=$product->pivot->quantity;
             }
             $data_static[0]->total_order+=1;
@@ -53,7 +51,7 @@ class OrderController extends Controller
             $statistical->profit=0;
             $statistical->quantity=0;
             foreach($order->products as $product){
-                $statistical->profit+= ($product->pivot->price * $product->pivot->quantity)-($product->price_input*$product->pivot->quantity);
+                $statistical->profit+= ($product->pivot->price * $product->pivot->quantity)-($product->input_price*$product->pivot->quantity);
                 $statistical->quantity+=$product->pivot->quantity;
             }
             $statistical->sales = $order->total;

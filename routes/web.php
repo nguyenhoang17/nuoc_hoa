@@ -59,6 +59,8 @@ Route::group([
     'middleware' =>['admin','preventBackHistory'],
 ],function(){
     Route::get('/dashboard',[DashboardController::class,'index'])->name('admin.dashboard');
+    Route::post('/fillter-by-date',[DashboardController::class,'fillterByDate'])->name('admin.dashboard.statistic.day');
+    Route::post('/dashboard_fillter',[DashboardController::class,'dashboardFillter'])->name('admin.dashboard.statistic.fillter');
     //Danh mục
     Route::prefix('categories')->name('admin.categories.')->group(function () {
         Route::get('/',[CategoryController::class,'index'])->name('list');
